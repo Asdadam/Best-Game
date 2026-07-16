@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://b3hjlgmu1lcvb"]
+[gd_scene format=3 uid="uid://b3hjlgmu1lcvb"]
 
 [ext_resource type="Texture2D" uid="uid://cfsd4p82x83g" path="res://assets/sprites/knight.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://bhqlgaeisqull" path="res://scripts/player.gd" id="1_g2els"]
@@ -102,7 +102,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_qlg0r")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 10.0
 }, {
@@ -110,7 +110,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_tuyoq")
 }],
-"loop": true,
+"loop": 1,
 "name": &"jump",
 "speed": 5.0
 }, {
@@ -163,7 +163,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_a38lo")
 }],
-"loop": true,
+"loop": 1,
 "name": &"run",
 "speed": 10.0
 }]
@@ -171,17 +171,17 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_fjrip"]
 radius = 5.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" unique_id=1674891889]
 z_index = 5
 collision_layer = 2
 script = ExtResource("1_g2els")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=674860865]
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_tuyoq")
 animation = &"jump"
 autoplay = "idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2044286301]
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_fjrip")
