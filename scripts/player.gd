@@ -13,6 +13,7 @@ const COYOTE_TIME : float = 0.2
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 var dashing : bool = false
+var can_dash : float = true
 var wall_jump_timer : float = 0.0
 var coyote_timer : float = 0.0
 
@@ -28,7 +29,11 @@ func _physics_process(delta: float) -> void:
 
 	var wall_normal := get_wall_normal().x
 	var is_against_wall := is_on_wall() and ((direction > 0 and wall_normal < 0) or (direction < 0 and wall_normal > 0))
-
+	
+	if is_against_wall:
+		can_dash = false
+	else:
+		can_dash = true
 
 	if not is_on_floor():
 		coyote_timer -= delta
@@ -52,7 +57,7 @@ func _physics_process(delta: float) -> void:
 			wall_jump_timer = WALL_JUMP_LOCK_TIME
 
 
-	if Input.is_action_just_pressed("dash") and not dashing:
+	if Input.is_action_just_pressed("dash") and not dashing and can_dash:
 		dashing = true
 		dash_duration.start()
 
