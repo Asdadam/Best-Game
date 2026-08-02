@@ -45,7 +45,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.y += get_gravity().y * delta
 	else:
-		coyote_timer =COYOTE_TIME
+		coyote_timer = COYOTE_TIME
 
 
 	if Input.is_action_just_pressed("Jump"):
@@ -55,7 +55,6 @@ func _physics_process(delta: float) -> void:
 			velocity.y = WALL_JUMP_VELOCITY.y
 			velocity.x = wall_normal * WALL_JUMP_VELOCITY.x
 			wall_jump_timer = WALL_JUMP_LOCK_TIME
-
 
 	if Input.is_action_just_pressed("dash") and not dashing and can_dash:
 		dashing = true
