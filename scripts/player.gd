@@ -76,7 +76,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("dash") and not dashing and can_dash:
 		dashing = true
 		dash_duration.start()
-
+		animated_sprite.play("dash")
 
 	if dashing:
 		#Yerimzide durmuyorsak gittiğimiz yöne dash,yerimizde duruyorsak baktığımız yere dash atmak için Dash_speed ile çarpacağımız vektör
@@ -101,14 +101,26 @@ func _physics_process(delta: float) -> void:
 	if not is_attacking:
 		if is_on_floor():
 			if direction == 0:
-				animated_sprite.play("idle")
+				if dashing:
+					animated_sprite.play("dash")
+				else:
+					animated_sprite.play("idle")
 			else:
-				animated_sprite.play("run")
+				if dashing:
+					animated_sprite.play("dash")
+				else:
+					animated_sprite.play("run")
 		else:
 			if velocity.y > 0:
-				animated_sprite.play("falling")
+				if dashing:
+					animated_sprite.play("dash")
+				else:
+					animated_sprite.play("falling")
 			else:
-				animated_sprite.play("jumping")
+				if dashing:
+					animated_sprite.play("dash")
+				else:
+					animated_sprite.play("jumping")
 			
 
 

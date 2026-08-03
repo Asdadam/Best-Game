@@ -150,6 +150,18 @@ region = Rect2(992, 0, 32, 32)
 atlas = ExtResource("2_g2els")
 region = Rect2(1024, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ke2ow"]
+atlas = ExtResource("2_g2els")
+region = Rect2(640, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ujl30"]
+atlas = ExtResource("2_g2els")
+region = Rect2(672, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31cv2"]
+atlas = ExtResource("2_g2els")
+region = Rect2(704, 0, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
 atlas = ExtResource("2_g2els")
 region = Rect2(544, 0, 32, 32)
@@ -235,6 +247,20 @@ animations = [{
 }],
 "loop": 1,
 "name": &"attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ke2ow")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ujl30")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_31cv2")
+}],
+"loop": 0,
+"name": &"dash",
 "speed": 10.0
 }, {
 "frames": [{
@@ -341,5 +367,5 @@ shape = SubResource("RectangleShape2D_1qvev")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=674860865]
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_tuyoq")
-animation = &"attack"
+animation = &"dash"
 autoplay = "idle"
