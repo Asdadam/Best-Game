@@ -12,11 +12,14 @@ const COYOTE_TIME : float = 0.2
 
 
 
+
 @onready var dash_duration: Timer = $Dash_duration
-@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var animated_sprite: AnimatedSprite2D = $Pivot/AnimatedSprite2D
+@onready var first_attack: AnimationPlayer = $firstAttack
 @onready var hit_box: Area2D = $Pivot/HitBox
 @onready var pivot: Node2D = $Pivot
+@onready var second_attack: AnimationPlayer = $secondAttack
+@onready var combo_timer: Timer = $combo_timer
 
 
 
@@ -25,20 +28,17 @@ var can_dash : bool = true
 var wall_jump_timer : float = 0.0
 var coyote_timer : float = 0.0
 var is_attacking : bool = false
+var attack_count : int = 0
 
 
 
 func _ready() -> void:
 	dash_duration.timeout.connect(_on_dash_timer_timeout)
-	animation_player.animation_finished.connect(_on_animation_finished)
+	first_attack.animation_finished.connect(_on_animation_finished)
+	second_attack.animation_finished.connect(_on_animation_finished)
+	combo_timer.timeout.connect(_on_combo_finished)
 
 func _physics_process(delta: float) -> void:
-	
-	if animated_sprite.flip_h:
-		pivot.scale.x = -1
-	else:
-		pivot.scale.x = 1
-	
 	if wall_jump_timer > 0:
 		wall_jump_timer -= delta
 
@@ -46,6 +46,13 @@ func _physics_process(delta: float) -> void:
 	var wall_normal := get_wall_normal().x#Duvarın normali
 	#Duvara yapışmışsak duvarın normaliile ters yöne bakmalıyız
 	var is_against_wall := is_on_wall() and ((direction > 0 and wall_normal < 0) or (direction < 0 and wall_normal > 0))
+	
+	if direction < 0:
+		pivot.scale.x = -1
+	elif direction > 0:
+		pivot.scale.x = 1
+	else:
+		pass
 	
 	if is_against_wall:
 		can_dash = false
@@ -74,13 +81,16 @@ func _physics_process(delta: float) -> void:
 			wall_jump_timer = WALL_JUMP_LOCK_TIME
 
 	if Input.is_action_just_pressed("dash") and not dashing and can_dash:
+		if is_attacking:
+			is_attacking = false
+			first_attack.stop()
 		dashing = true
 		dash_duration.start()
 		animated_sprite.play("dash")
 
 	if dashing:
 		#Yerimzide durmuyorsak gittiğimiz yöne dash,yerimizde duruyorsak baktığımız yere dash atmak için Dash_speed ile çarpacağımız vektör
-		var dash_dir = direction if direction != 0 else (-1.0 if animated_sprite.flip_h else 1.0)
+		var dash_dir = direction if direction != 0 else (-1.0 if pivot.scale.x == -1 else 1.0)
 		velocity.x = dash_dir * DASH_SPEED
 	elif wall_jump_timer <= 0:
 		if direction != 0:
@@ -88,15 +98,15 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 
-	if direction < 0 and wall_jump_timer <= 0:
-		animated_sprite.flip_h = true
-	elif direction > 0 and wall_jump_timer <= 0:
-		animated_sprite.flip_h = false
 
-	if Input.is_action_just_pressed("attack") and not is_attacking:
-		is_attacking = true
-		animation_player.play("attack")
-		animated_sprite.play("attack")
+	if Input.is_action_just_pressed("attack") and not is_attacking and not dashing and not is_against_wall:
+		attack()
+		if attack_count <= 1:
+			attack_count +=1
+		else:
+			attack_count = 0
+		
+
 
 	if not is_attacking:
 		if is_on_floor():
@@ -126,9 +136,22 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
+func attack():
+	if attack_count == 0:
+		is_attacking = true
+		first_attack.play("attack")
+		animated_sprite.play("attack")
+	elif attack_count == 1:
+		is_attacking = true
+		second_attack.play("secondAttack")
+		animated_sprite.play("2Attack")
+
 func _on_dash_timer_timeout() -> void:
 	dashing = false
 
 func _on_animation_finished(anim_name : StringName):
-	if anim_name == "attack":
+	if anim_name == "attack" or "2Attack":
 		is_attacking = false
+
+func _on_combo_finished():
+	attack_count = 0

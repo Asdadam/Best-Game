@@ -522,6 +522,3 @@ shape = SubResource("RectangleShape2D_1qvev")
 
 [node name="secondAttack" type="AnimationPlayer" parent="." unique_id=1120189002]
 libraries/ = SubResource("AnimationLibrary_tuyoq")
-
-[node name="combo_timer" type="Timer" parent="." unique_id=1702492067]
-wait_time = 0.2
