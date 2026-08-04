@@ -41,6 +41,9 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if wall_jump_timer > 0:
 		wall_jump_timer -= delta
+	
+	if is_attacking and  is_on_floor():
+		return
 
 	var direction := Input.get_axis("move_left", "move_right")#Oyuncunun gittiği taraf
 	var wall_normal := get_wall_normal().x#Duvarın normali
@@ -101,6 +104,7 @@ func _physics_process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("attack") and not is_attacking and not dashing and not is_against_wall:
 		attack()
+		combo_timer.start()
 		if attack_count <= 1:
 			attack_count +=1
 		else:

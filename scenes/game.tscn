@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dqa01xdajdmpt" path="res://scenes/platform.tscn" id="3_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://dvh1kxc2hijxo" path="res://scenes/coin.tscn" id="4_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://btvetxn3a0nfn" path="res://scenes/killzone.tscn" id="5_iywne"]
+[ext_resource type="PackedScene" uid="uid://by7we5eb5m8op" path="res://scenes/enemy.tscn" id="8_gee14"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnu2h"]
 texture = ExtResource("2_yqjtg")
@@ -299,3 +300,7 @@ position = Vector2(372, 50)
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Platforms/platform2" unique_id=1736531734]
 libraries/ = SubResource("AnimationLibrary_iywne")
 autoplay = &"move"
+
+[node name="Enemy" parent="." unique_id=494954956 instance=ExtResource("8_gee14")]
+position = Vector2(295, -11)
+hit_points = 100

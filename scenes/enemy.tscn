@@ -1,6 +1,23 @@
 [gd_scene format=3 uid="uid://by7we5eb5m8op"]
 
 [ext_resource type="Texture2D" uid="uid://cfsd4p82x83g" path="res://assets/sprites/knight.png" id="1_7p1mj"]
+[ext_resource type="Script" uid="uid://btjd7r7bcl0ln" path="res://scripts/enemy.gd" id="1_md0e3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xwavj"]
+atlas = ExtResource("1_7p1mj")
+region = Rect2(0, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nenq2"]
+atlas = ExtResource("1_7p1mj")
+region = Rect2(32, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_md484"]
+atlas = ExtResource("1_7p1mj")
+region = Rect2(64, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ipns3"]
+atlas = ExtResource("1_7p1mj")
+region = Rect2(96, 224, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_md0e3"]
 atlas = ExtResource("1_7p1mj")
@@ -20,6 +37,23 @@ region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_moenx"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xwavj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nenq2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_md484")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ipns3")
+}],
+"loop": 0,
+"name": &"Death",
+"speed": 3.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_md0e3")
@@ -47,20 +81,33 @@ height = 24.0
 
 [node name="Enemy" type="CharacterBody2D" unique_id=494954956]
 scale = Vector2(-1, 1)
+collision_layer = 0
+script = ExtResource("1_md0e3")
+hit_points = 200
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1022302942]
 sprite_frames = SubResource("SpriteFrames_moenx")
-animation = &"Idle"
+animation = &"Death"
 autoplay = "Idle"
-frame_progress = 0.54228365
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=951836612]
-position = Vector2(0, 11)
+position = Vector2(0, 9)
 shape = SubResource("CircleShape2D_moenx")
 
-[node name="Hitbox" type="Area2D" parent="." unique_id=1446545293]
+[node name="Hurtbox" type="Area2D" parent="." unique_id=1446545293]
+collision_layer = 16
+collision_mask = 0
+input_pickable = false
 monitoring = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=431233683]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=431233683]
 position = Vector2(0, 5)
 shape = SubResource("CapsuleShape2D_moenx")
+
+[node name="HP" type="Label" parent="." unique_id=1806541151]
+offset_left = -12.3528595
+offset_top = -27.0
+offset_right = 12.352863
+offset_bottom = -4.0
+offset_transform_enabled = true
+offset_transform_scale = Vector2(-1, 1)
