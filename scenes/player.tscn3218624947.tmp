@@ -2,10 +2,9 @@
 
 [ext_resource type="Script" uid="uid://bhqlgaeisqull" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://bq80lari66dbr" path="res://assets/sprites/GERÇEK ANİMASYON-Recovered-Sheet.png" id="2_g2els"]
-[ext_resource type="Script" uid="uid://d177dtetftxki" path="res://scripts/hit_box.gd" id="3_qhqgy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fjrip"]
-radius = 6.0
+radius = 5.0
 
 [sub_resource type="Animation" id="Animation_g2els"]
 length = 0.001
@@ -60,7 +59,6 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_qhqgy"]
 resource_name = "attack"
-length = 0.5
 step = 1.0
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -69,10 +67,10 @@ tracks/0/path = NodePath("Pivot/HitBox:monitoring")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.14, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0.14, 0.28, 0.42, 0.56, 0.7, 0.84, 0.96, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [-0.76828927, false]
+"values": [-0.76828927, -1.9184523, -2.078835, -3.583136, -5.8766537, -5.853202, -5.5259857, false]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -81,7 +79,7 @@ tracks/1/path = NodePath("Pivot/HitBox:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.07, 0.14, 0.21, 0.28, 0.35, 0.42, 0.48, 0.5),
+"times": PackedFloat32Array(0.14, 0.28, 0.42, 0.56, 0.7, 0.84, 0.96, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(-8.000001, -17), Vector2(-6.999999, -9), Vector2(1.9999995, -6.0000005), Vector2(8.000001, -8), Vector2(11, -19.000002), Vector2(9, -18.000002), Vector2(9, -19.000002), Vector2(-8, -17)]
@@ -93,7 +91,7 @@ tracks/2/path = NodePath("Pivot/HitBox:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.07, 0.14, 0.21, 0.28, 0.35, 0.42, 0.48, 0.5),
+"times": PackedFloat32Array(0.14, 0.28, 0.4, 0.56, 0.7, 0.84, 0.96, 1),
 "transitions": PackedFloat32Array(1, 1, 1.0352634, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [true, -2.0712082, 1.9024088846738192, 2.2608123, 1.0, 1.0, 1.0, 1.0]
@@ -105,7 +103,7 @@ tracks/3/path = NodePath("Pivot/AnimatedSprite2D:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.07, 0.14, 0.21, 0.28, 0.35, 0.42),
+"times": PackedFloat32Array(0, 0.14, 0.28, 0.42, 0.56, 0.7, 0.84),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6]
@@ -488,7 +486,7 @@ position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_fjrip")
 
 [node name="Dash_duration" type="Timer" parent="." unique_id=2029626662]
-wait_time = 0.28
+wait_time = 0.5
 
 [node name="LeftRay" type="RayCast2D" parent="." unique_id=885573093]
 position = Vector2(0, -5)
@@ -506,7 +504,7 @@ libraries/ = SubResource("AnimationLibrary_dqkch")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Pivot" unique_id=674860865]
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_tuyoq")
-animation = &"attack"
+animation = &"2Attack"
 autoplay = "idle"
 
 [node name="HitBox" type="Area2D" parent="Pivot" unique_id=2095427653]
@@ -517,7 +515,6 @@ collision_layer = 0
 collision_mask = 16
 input_pickable = false
 monitorable = false
-script = ExtResource("3_qhqgy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/HitBox" unique_id=680096129]
 position = Vector2(-0.12407011, -7.2100368)
@@ -525,8 +522,3 @@ shape = SubResource("RectangleShape2D_1qvev")
 
 [node name="secondAttack" type="AnimationPlayer" parent="." unique_id=1120189002]
 libraries/ = SubResource("AnimationLibrary_tuyoq")
-
-[node name="combo_timer" type="Timer" parent="." unique_id=1702492067]
-wait_time = 0.7
-
-[connection signal="area_entered" from="Pivot/HitBox" to="Pivot/HitBox" method="_on_area_entered"]
