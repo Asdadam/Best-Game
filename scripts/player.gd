@@ -42,9 +42,6 @@ func _physics_process(delta: float) -> void:
 	if wall_jump_timer > 0:
 		wall_jump_timer -= delta
 	
-	if is_attacking and  is_on_floor():
-		return
-
 	var direction := Input.get_axis("move_left", "move_right")#Oyuncunun gittiği taraf
 	var wall_normal := get_wall_normal().x#Duvarın normali
 	#Duvara yapışmışsak duvarın normaliile ters yöne bakmalıyız
@@ -90,11 +87,13 @@ func _physics_process(delta: float) -> void:
 		dashing = true
 		dash_duration.start()
 		animated_sprite.play("dash")
+		
 
 	if dashing:
 		#Yerimzide durmuyorsak gittiğimiz yöne dash,yerimizde duruyorsak baktığımız yere dash atmak için Dash_speed ile çarpacağımız vektör
 		var dash_dir = direction if direction != 0 else (-1.0 if pivot.scale.x == -1 else 1.0)
 		velocity.x = dash_dir * DASH_SPEED
+		velocity.y = 0
 	elif wall_jump_timer <= 0:
 		if direction != 0:
 			velocity.x = direction * SPEED
@@ -126,10 +125,7 @@ func _physics_process(delta: float) -> void:
 					animated_sprite.play("run")
 		else:
 			if velocity.y > 0:
-				if dashing:
-					animated_sprite.play("dash")
-				else:
-					animated_sprite.play("falling")
+				animated_sprite.play("falling")
 			else:
 				if dashing:
 					animated_sprite.play("dash")

@@ -488,7 +488,7 @@ position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_fjrip")
 
 [node name="Dash_duration" type="Timer" parent="." unique_id=2029626662]
-wait_time = 0.5
+wait_time = 0.28
 
 [node name="LeftRay" type="RayCast2D" parent="." unique_id=885573093]
 position = Vector2(0, -5)
