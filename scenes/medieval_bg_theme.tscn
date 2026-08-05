@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://b4fffkeedbpfs"]
+
+[ext_resource type="AudioStream" uid="uid://5q3v1n2o0fvg" path="res://assets/music/Medieval.mp3" id="1_h676t"]
+
+[node name="Medieval BG Theme" type="AudioStreamPlayer2D" unique_id=745663684]
+stream = ExtResource("1_h676t")
+volume_db = 20.0
+autoplay = true
+bus = &"Music"
