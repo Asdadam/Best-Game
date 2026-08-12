@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bq80lari66dbr"
-path="res://.godot/imported/GERÇEK ANİMASYON-Recovered-Sheet.png-dcbbdb5e1b4c955eb2cf865a52ef6050.ctex"
+uid="uid://6fuje3i86gha"
+path="res://.godot/imported/BACKGRAND .png-92862df767fbfb4f4c0c006bab3c6609.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/GERÇEK ANİMASYON-Recovered-Sheet.png"
-dest_files=["res://.godot/imported/GERÇEK ANİMASYON-Recovered-Sheet.png-dcbbdb5e1b4c955eb2cf865a52ef6050.ctex"]
+source_file="res://assets/sprites/BACKGRAND .png"
+dest_files=["res://.godot/imported/BACKGRAND .png-92862df767fbfb4f4c0c006bab3c6609.ctex"]
 
 [params]
 
