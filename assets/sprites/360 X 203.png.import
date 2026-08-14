@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvysyroxqksbp"
-path="res://.godot/imported/arka plan 01.png-9239d87f80c4b97a97bc006f915100bb.ctex"
+uid="uid://b8x3njekvs83v"
+path="res://.godot/imported/360 X 203.png-00ed93c27a678bcd88bf500bd07bddf5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/arka plan 01.png"
-dest_files=["res://.godot/imported/arka plan 01.png-9239d87f80c4b97a97bc006f915100bb.ctex"]
+source_file="res://assets/sprites/360 X 203.png"
+dest_files=["res://.godot/imported/360 X 203.png-00ed93c27a678bcd88bf500bd07bddf5.ctex"]
 
 [params]
 

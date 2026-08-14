@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dw8qdlvqod8kj"
-path="res://.godot/imported/REECEP TİLE SETTO-Recovered.png-53ad7da53d487e99c6b367f7d1ad93bf.ctex"
+uid="uid://gvyufntupwui"
+path="res://.godot/imported/BACKGORUND UZUN.png-cea34823a5493f3a539540993a24a1a2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/REECEP TİLE SETTO-Recovered.png"
-dest_files=["res://.godot/imported/REECEP TİLE SETTO-Recovered.png-53ad7da53d487e99c6b367f7d1ad93bf.ctex"]
+source_file="res://assets/sprites/BACKGORUND UZUN.png"
+dest_files=["res://.godot/imported/BACKGORUND UZUN.png-cea34823a5493f3a539540993a24a1a2.ctex"]
 
 [params]
 
