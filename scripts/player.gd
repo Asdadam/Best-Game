@@ -20,6 +20,7 @@ const COYOTE_TIME : float = 0.2
 @onready var pivot: Node2D = $Pivot
 @onready var second_attack: AnimationPlayer = $secondAttack
 @onready var combo_timer: Timer = $combo_timer
+@onready var dash_cd: Timer = $Dash_cd
 
 
 
@@ -29,11 +30,15 @@ var wall_jump_timer : float = 0.0
 var coyote_timer : float = 0.0
 var is_attacking : bool = false
 var attack_count : int = 0
+var can_dash_air : bool = true
+var dash_from_wall : bool = false
+var dash_dir = 0
 
 
 
 func _ready() -> void:
 	dash_duration.timeout.connect(_on_dash_timer_timeout)
+	dash_cd.timeout.connect(_on_dash_cd_timer_timeout)
 	first_attack.animation_finished.connect(_on_animation_finished)
 	second_attack.animation_finished.connect(_on_animation_finished)
 	combo_timer.timeout.connect(_on_combo_finished)
@@ -54,11 +59,10 @@ func _physics_process(delta: float) -> void:
 	else:
 		pass
 	
-	if is_against_wall:
-		can_dash = false
-	else:
-		can_dash = true
+	if is_on_floor() or is_against_wall:
+		can_dash_air = true
 
+	
 	if not is_on_floor():
 		coyote_timer -= delta#Zıpladıktan sonra hemen duvara yapışmamak için araya küçük bir süre sıkıştırdım
 		if is_against_wall and coyote_timer <= 0:
@@ -80,20 +84,25 @@ func _physics_process(delta: float) -> void:
 			velocity.x = wall_normal * WALL_JUMP_VELOCITY.x
 			wall_jump_timer = WALL_JUMP_LOCK_TIME
 
-	if Input.is_action_just_pressed("dash") and not dashing and can_dash:
-		if is_attacking:
+	if Input.is_action_just_pressed("dash") and not dashing and can_dash and can_dash_air:
+		if is_attacking: 
 			is_attacking = false
 			first_attack.stop()
+		if not is_on_floor(): #Havada mı dash attın?
+			can_dash_air = false
+		dash_dir = direction if direction != 0 else (-1.0 if pivot.scale.x == -1 else 1.0)
+		if is_on_wall() and not is_on_floor():
+			dash_dir *= -1
 		dashing = true
 		dash_duration.start()
 		animated_sprite.play("dash")
-		
 
 	if dashing:
-		#Yerimzide durmuyorsak gittiğimiz yöne dash,yerimizde duruyorsak baktığımız yere dash atmak için Dash_speed ile çarpacağımız vektör
-		var dash_dir = direction if direction != 0 else (-1.0 if pivot.scale.x == -1 else 1.0)
-		velocity.x = dash_dir * DASH_SPEED
-		velocity.y = 0
+		#Yerimizde durmuyorsak gittiğimiz yöne dash,yerimizde duruyorsak baktığımız yere dash atmak için Dash_speed ile çarpacağımız vektör
+			pivot.scale.x = dash_dir
+			velocity.x = dash_dir * DASH_SPEED
+			velocity.y = 0
+
 	elif wall_jump_timer <= 0:
 		if direction != 0:
 			velocity.x = direction * SPEED
@@ -148,6 +157,9 @@ func attack():
 
 func _on_dash_timer_timeout() -> void:
 	dashing = false
+	can_dash = false
+	dash_from_wall = false
+	dash_cd.start()
 
 func _on_animation_finished(anim_name : StringName):
 	if anim_name == "attack" or "2Attack":
@@ -155,3 +167,6 @@ func _on_animation_finished(anim_name : StringName):
 
 func _on_combo_finished():
 	attack_count = 0
+
+func _on_dash_cd_timer_timeout():
+	can_dash = true
