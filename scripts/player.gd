@@ -41,6 +41,7 @@ func _physics_process(delta: float) -> void:
 	if wall_jump_timer > 0:
 		wall_jump_timer -= delta
 	
+	#YANLIŞLIKLA DUVARA YAPIŞMAMAK İÇİN(KISMEN)
 	var wall_normal := get_wall_normal().x
 	var is_against_wall := is_on_wall() and ((direction > 0 and wall_normal < 0) or (direction < 0 and wall_normal > 0))
 	
@@ -49,9 +50,11 @@ func _physics_process(delta: float) -> void:
 	elif direction > 0:
 		pivot.scale.x = 1
 	
+	#DASH RESETİ
 	if is_on_floor() or is_against_wall:
 		can_dash_air = true
 	
+	#WALLCLİMB
 	if not is_on_floor():
 		coyote_timer -= delta
 		if is_against_wall and coyote_timer <= 0:
@@ -84,6 +87,7 @@ func _physics_process(delta: float) -> void:
 		dashing = true
 		dash_duration.start()
 
+	#DASH
 	if dashing:
 		pivot.scale.x = dash_dir
 		velocity.x = dash_dir * DASH_SPEED
@@ -94,6 +98,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 
+	#ATTACK
 	if Input.is_action_just_pressed("attack") and not is_attacking and not dashing and not is_against_wall:
 		attack()
 		combo_timer.start()

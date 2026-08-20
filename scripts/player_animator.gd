@@ -11,7 +11,7 @@ func _ready() -> void:
 	second_attack.animation_finished.connect(_on_animation_finished)
 
 func _process(_delta: float) -> void:
-	#OYUNCU SALDIRMIYORKEN OYUNCU ANİMASYONLARINI YÖNER
+	#OYUNCU SALDIRMIYORKEN OYUNCU ANİMASYONLARINI YÖNET
 	if not player.is_attacking:
 		update_movement_animation()
 
@@ -20,6 +20,7 @@ func update_movement_animation() -> void:
 		animated_sprite.play("dash")
 		return
 
+	#KARAKTER ANİMASYONLARI
 	if player.is_on_floor():
 		if player.direction == 0:
 			animated_sprite.play("idle")
