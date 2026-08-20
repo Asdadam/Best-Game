@@ -52,7 +52,7 @@ func _physics_process(delta: float) -> void:
 		pivot.scale.x = 1
 	
 	#DASH RESETİ
-	if is_on_floor() or is_on_wall():
+	if is_on_floor() or is_against_wall:
 		jump_counter = 0
 		can_dash_air = true
 	
@@ -89,8 +89,9 @@ func _physics_process(delta: float) -> void:
 		if not is_on_floor():
 			can_dash_air = false
 		dash_dir = direction if direction != 0 else (-1.0 if pivot.scale.x == -1 else 1.0)
-		if is_on_wall() and not is_on_floor() and Input.is_key_pressed(KEY_A) or Input.is_key_pressed(KEY_D):
-			dash_dir *= -1
+		if is_on_wall() and not is_on_floor():
+			if  Input.is_key_pressed(KEY_A) or Input.is_key_pressed(KEY_D):
+				dash_dir *= -1
 		dashing = true
 		dash_duration.start()
 
