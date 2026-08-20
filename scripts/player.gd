@@ -29,6 +29,7 @@ var can_dash_air : bool = true
 var dash_from_wall : bool = false
 var dash_dir : float = 0.0
 var direction : float = 0.0
+var jump_counter : float = 0.0
 
 func _ready() -> void:
 	dash_duration.timeout.connect(_on_dash_timer_timeout)
@@ -51,7 +52,8 @@ func _physics_process(delta: float) -> void:
 		pivot.scale.x = 1
 	
 	#DASH RESETİ
-	if is_on_floor() or is_against_wall:
+	if is_on_floor() or is_on_wall():
+		jump_counter = 0
 		can_dash_air = true
 	
 	#WALLCLİMB
@@ -68,12 +70,17 @@ func _physics_process(delta: float) -> void:
 		coyote_timer = COYOTE_TIME
 
 	if Input.is_action_just_pressed("Jump"):
-		if is_on_floor():
+		if is_on_floor() and jump_counter == 0:
+			jump_counter = 1
 			velocity.y = JUMP_VELOCITY
-		elif is_on_wall() and not is_on_floor():
+		elif is_on_wall() and not is_on_floor() and jump_counter == 0:
+			jump_counter = 1
 			velocity.y = WALL_JUMP_VELOCITY.y
 			velocity.x = wall_normal * WALL_JUMP_VELOCITY.x
 			wall_jump_timer = WALL_JUMP_LOCK_TIME
+		elif not is_on_wall() and not is_on_floor() and jump_counter == 1:
+			jump_counter = 0
+			velocity.y = JUMP_VELOCITY
 
 	if Input.is_action_just_pressed("dash") and not dashing and can_dash and can_dash_air:
 		if is_attacking: 
