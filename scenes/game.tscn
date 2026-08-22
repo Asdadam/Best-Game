@@ -246,6 +246,7 @@ position = Vector2(31, 40)
 
 [node name="Killzone" parent="." unique_id=1637326944 instance=ExtResource("5_iywne")]
 position = Vector2(78, 143)
+collision_mask = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone" unique_id=1921086984]
 shape = SubResource("WorldBoundaryShape2D_p57ef")
@@ -254,33 +255,43 @@ shape = SubResource("WorldBoundaryShape2D_p57ef")
 
 [node name="coin" parent="Coins" unique_id=2046261938 instance=ExtResource("4_lbhrr")]
 position = Vector2(72, 71)
+collision_mask = 1
 
 [node name="coin2" parent="Coins" unique_id=1381265605 instance=ExtResource("4_lbhrr")]
 position = Vector2(216, 68)
+collision_mask = 1
 
 [node name="coin3" parent="Coins" unique_id=309221705 instance=ExtResource("4_lbhrr")]
 position = Vector2(232, 68)
+collision_mask = 1
 
 [node name="coin4" parent="Coins" unique_id=1949619004 instance=ExtResource("4_lbhrr")]
 position = Vector2(104, -46)
+collision_mask = 1
 
 [node name="coin5" parent="Coins" unique_id=1036423723 instance=ExtResource("4_lbhrr")]
 position = Vector2(505, 37)
+collision_mask = 1
 
 [node name="coin6" parent="Coins" unique_id=1802409161 instance=ExtResource("4_lbhrr")]
 position = Vector2(760, -24)
+collision_mask = 1
 
 [node name="coin7" parent="Coins" unique_id=1814712650 instance=ExtResource("4_lbhrr")]
 position = Vector2(775, -23)
+collision_mask = 1
 
 [node name="coin8" parent="Coins" unique_id=559418279 instance=ExtResource("4_lbhrr")]
 position = Vector2(790, -24)
+collision_mask = 1
 
 [node name="coin9" parent="Coins" unique_id=600391262 instance=ExtResource("4_lbhrr")]
 position = Vector2(632, -106)
+collision_mask = 1
 
 [node name="coin10" parent="Coins" unique_id=601085401 instance=ExtResource("4_lbhrr")]
 position = Vector2(600, -106)
+collision_mask = 1
 
 [node name="Platforms" type="Node" parent="." unique_id=510811318]
 

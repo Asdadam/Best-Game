@@ -256,7 +256,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wnwbv")
 }],
-"loop": 1,
+"loop": true,
 "name": &"2Attack",
 "speed": 15.0
 }, {
@@ -285,7 +285,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4ni07")
 }],
-"loop": 1,
+"loop": true,
 "name": &"attack",
 "speed": 10.0
 }, {
@@ -299,7 +299,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_31cv2")
 }],
-"loop": 0,
+"loop": false,
 "name": &"dash",
 "speed": 10.0
 }, {
@@ -307,7 +307,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_g2els")
 }],
-"loop": 1,
+"loop": true,
 "name": &"falling",
 "speed": 5.0
 }, {
@@ -327,7 +327,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fjrip")
 }],
-"loop": 1,
+"loop": true,
 "name": &"idle",
 "speed": 10.0
 }, {
@@ -335,7 +335,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_smehm")
 }],
-"loop": 1,
+"loop": true,
 "name": &"jumping",
 "speed": 4.0
 }, {
@@ -361,7 +361,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_a8ls1")
 }],
-"loop": 1,
+"loop": true,
 "name": &"run",
 "speed": 7.0
 }]
@@ -481,7 +481,7 @@ _data = {
 
 [node name="Player" type="CharacterBody2D" unique_id=1674891889]
 z_index = 5
-collision_layer = 2
+collision_mask = 257
 script = ExtResource("1_g2els")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1365515956]

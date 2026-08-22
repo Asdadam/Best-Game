@@ -138,3 +138,12 @@ func _on_combo_finished():
 
 func _on_dash_cd_timer_timeout():
 	can_dash = true
+		
+
+#ONE-WAYLERDE AŞAĞI İNMEYİ YAPAR
+func _input(event):
+	if event.is_action_pressed("move_down"):
+		set_collision_mask_value(9, false)
+	else:
+		set_collision_mask_value(9, true)
+	
