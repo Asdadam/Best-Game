@@ -12,6 +12,7 @@ const WALL_JUMP_VELOCITY : Vector2 = Vector2(220.0, -280.0)
 const WALL_JUMP_LOCK_TIME : float = 0.1
 const COYOTE_TIME : float = 0.2
 
+
 @onready var dash_duration: Timer = $Dash_duration
 @onready var hit_box: Area2D = $Pivot/HitBox
 @onready var pivot: Node2D = $Pivot
@@ -29,7 +30,8 @@ var can_dash_air : bool = true
 var dash_from_wall : bool = false
 var dash_dir : float = 0.0
 var direction : float = 0.0
-var jump_counter : float = 0.0
+var max_jump : int = 2
+var falling : bool = false
 
 func _ready() -> void:
 	dash_duration.timeout.connect(_on_dash_timer_timeout)
@@ -37,14 +39,18 @@ func _ready() -> void:
 	combo_timer.timeout.connect(_on_combo_finished)
 
 func _physics_process(delta: float) -> void:
-	direction = Input.get_axis("move_left", "move_right") 
-
+	direction = Input.get_axis("move_left", "move_right")
+	
+	
 	if wall_jump_timer > 0:
 		wall_jump_timer -= delta
+	
+	
 	
 	#YANLIŞLIKLA DUVARA YAPIŞMAMAK İÇİN(KISMEN)
 	var wall_normal := get_wall_normal().x
 	var is_against_wall := is_on_wall() and ((direction > 0 and wall_normal < 0) or (direction < 0 and wall_normal > 0))
+	var airborn := not is_on_floor() and not is_on_wall()
 	
 	if direction < 0:
 		pivot.scale.x = -1
@@ -53,7 +59,7 @@ func _physics_process(delta: float) -> void:
 	
 	#DASH RESETİ
 	if is_on_floor() or is_against_wall:
-		jump_counter = 0
+		max_jump = 2
 		can_dash_air = true
 	
 	#WALLCLİMB
@@ -70,16 +76,19 @@ func _physics_process(delta: float) -> void:
 		coyote_timer = COYOTE_TIME
 
 	if Input.is_action_just_pressed("Jump"):
-		if is_on_floor() and jump_counter == 0:
-			jump_counter = 1
+		if airborn and max_jump == 2:
+			max_jump -= 1
+		
+		if is_on_floor() and max_jump > 0:
+			max_jump -= 1
 			velocity.y = JUMP_VELOCITY
-		elif is_on_wall() and not is_on_floor() and jump_counter == 0:
-			jump_counter = 1
+		elif is_on_wall() and not is_on_floor() and max_jump > 0:
+			max_jump -= 1
 			velocity.y = WALL_JUMP_VELOCITY.y
 			velocity.x = wall_normal * WALL_JUMP_VELOCITY.x
 			wall_jump_timer = WALL_JUMP_LOCK_TIME
-		elif not is_on_wall() and not is_on_floor() and jump_counter == 1:
-			jump_counter = 0
+		elif not is_on_wall() and not is_on_floor() and max_jump > 0:
+			max_jump -= 1
 			velocity.y = JUMP_VELOCITY
 
 	if Input.is_action_just_pressed("dash") and not dashing and can_dash and can_dash_air:
