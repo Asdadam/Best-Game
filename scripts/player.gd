@@ -32,13 +32,10 @@ var can_dash_air : bool = true
 var dash_from_wall : bool = false
 var dash_dir : float = 0.0
 var direction : float = 0.0
-<<<<<<< Updated upstream
 var max_jump : int = 2
 var falling : bool = false
-=======
 var jump_counter : float = 0.0
 var can_down := true
->>>>>>> Stashed changes
 
 func _ready() -> void:
 	dash_duration.timeout.connect(_on_dash_timer_timeout)

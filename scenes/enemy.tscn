@@ -50,7 +50,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ipns3")
 }],
-"loop": 0,
+"loop": false,
 "name": &"Death",
 "speed": 3.0
 }, {
@@ -67,7 +67,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_c4w8v")
 }],
-"loop": 1,
+"loop": true,
 "name": &"Idle",
 "speed": 5.0
 }]
@@ -105,9 +105,8 @@ position = Vector2(0, 5)
 shape = SubResource("CapsuleShape2D_moenx")
 
 [node name="HP" type="Label" parent="." unique_id=1806541151]
-offset_left = -12.3528595
+offset_left = 12.0
 offset_top = -27.0
-offset_right = 12.352863
+offset_right = 36.705723
 offset_bottom = -4.0
-offset_transform_enabled = true
-offset_transform_scale = Vector2(-1, 1)
+scale = Vector2(-1, 1)
