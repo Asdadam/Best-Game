@@ -298,6 +298,15 @@ collision_mask = 1
 [node name="platform" parent="Platforms" unique_id=919529869 instance=ExtResource("3_lnu2h")]
 position = Vector2(31, 12)
 
+[node name="platform3" parent="Platforms" unique_id=1730387873 instance=ExtResource("3_lnu2h")]
+position = Vector2(31, -24)
+
+[node name="platform4" parent="Platforms" unique_id=1222464906 instance=ExtResource("3_lnu2h")]
+position = Vector2(30, -54)
+
+[node name="platform5" parent="Platforms" unique_id=1680726582 instance=ExtResource("3_lnu2h")]
+position = Vector2(30, -82)
+
 [node name="platform2" parent="Platforms" unique_id=757855438 instance=ExtResource("3_lnu2h")]
 position = Vector2(372, 50)
 

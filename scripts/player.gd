@@ -19,6 +19,8 @@ const COYOTE_TIME : float = 0.2
 @onready var combo_timer: Timer = $combo_timer
 @onready var dash_cd: Timer = $Dash_cd
 @onready var animator: PlayerAnimator = $PlayerAnimator # Yeni animasyon düğümü
+@onready var down_cd: Timer = $Down_cd
+
 
 var dashing : bool = false
 var can_dash : bool = true
@@ -30,13 +32,19 @@ var can_dash_air : bool = true
 var dash_from_wall : bool = false
 var dash_dir : float = 0.0
 var direction : float = 0.0
+<<<<<<< Updated upstream
 var max_jump : int = 2
 var falling : bool = false
+=======
+var jump_counter : float = 0.0
+var can_down := true
+>>>>>>> Stashed changes
 
 func _ready() -> void:
 	dash_duration.timeout.connect(_on_dash_timer_timeout)
 	dash_cd.timeout.connect(_on_dash_cd_timer_timeout)
 	combo_timer.timeout.connect(_on_combo_finished)
+	down_cd.timeout.connect(_on_down_cd_timeout)
 
 func _physics_process(delta: float) -> void:
 	direction = Input.get_axis("move_left", "move_right")
@@ -121,6 +129,13 @@ func _physics_process(delta: float) -> void:
 		combo_timer.start()
 		attack_count = (attack_count + 1) % 2
 
+	if Input.is_action_just_pressed("move_down") and down_cd.time_left <= 0:
+		down_cd.start()
+			
+	
+
+
+
 	move_and_slide()
 
 func attack():
@@ -142,8 +157,13 @@ func _on_dash_cd_timer_timeout():
 
 #ONE-WAYLERDE AŞAĞI İNMEYİ YAPAR
 func _input(event):
-	if event.is_action_pressed("move_down"):
+	if event.is_action_pressed("move_down") and can_down and is_on_floor():
+		can_down = false
 		set_collision_mask_value(9, false)
-	else:
-		set_collision_mask_value(9, true)
+		down_cd.start()
 	
+	
+	
+func _on_down_cd_timeout() -> void:
+	can_down = true
+	set_collision_mask_value(9, true)

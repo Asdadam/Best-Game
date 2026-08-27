@@ -545,4 +545,8 @@ libraries/ = SubResource("AnimationLibrary_tuyoq")
 [node name="combo_timer" type="Timer" parent="." unique_id=1702492067]
 wait_time = 0.7
 
+[node name="Down_cd" type="Timer" parent="." unique_id=1175457806]
+wait_time = 0.15
+
 [connection signal="area_entered" from="Pivot/HitBox" to="Pivot/HitBox" method="_on_area_entered"]
+[connection signal="timeout" from="Down_cd" to="." method="_on_down_cd_timeout"]
