@@ -256,7 +256,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wnwbv")
 }],
-"loop": true,
+"loop": 1,
 "name": &"2Attack",
 "speed": 15.0
 }, {
@@ -285,7 +285,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4ni07")
 }],
-"loop": true,
+"loop": 1,
 "name": &"attack",
 "speed": 10.0
 }, {
@@ -299,7 +299,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_31cv2")
 }],
-"loop": false,
+"loop": 0,
 "name": &"dash",
 "speed": 10.0
 }, {
@@ -307,7 +307,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_g2els")
 }],
-"loop": true,
+"loop": 1,
 "name": &"falling",
 "speed": 5.0
 }, {
@@ -327,7 +327,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fjrip")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 10.0
 }, {
@@ -335,7 +335,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_smehm")
 }],
-"loop": true,
+"loop": 1,
 "name": &"jumping",
 "speed": 4.0
 }, {
@@ -361,7 +361,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_a8ls1")
 }],
-"loop": true,
+"loop": 1,
 "name": &"run",
 "speed": 7.0
 }]
@@ -479,7 +479,7 @@ _data = {
 &"secondAttack": SubResource("Animation_qlg0r")
 }
 
-[node name="Player" type="CharacterBody2D" unique_id=1674891889]
+[node name="Player" type="CharacterBody2D" unique_id=1674891889 groups=["Player"]]
 z_index = 5
 collision_mask = 257
 script = ExtResource("1_g2els")
@@ -549,4 +549,3 @@ wait_time = 0.7
 wait_time = 0.15
 
 [connection signal="area_entered" from="Pivot/HitBox" to="Pivot/HitBox" method="_on_area_entered"]
-[connection signal="timeout" from="Down_cd" to="." method="_on_down_cd_timeout"]

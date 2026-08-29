@@ -63,7 +63,7 @@ func _physics_process(delta: float) -> void:
 		pivot.scale.x = 1
 	
 	#DASH RESETİ
-	if is_on_floor() or is_against_wall:
+	if is_on_floor() or is_against_wall or is_on_wall():
 		max_jump = 2
 		can_dash_air = true
 	
@@ -130,8 +130,6 @@ func _physics_process(delta: float) -> void:
 		down_cd.start()
 			
 	
-
-
 
 	move_and_slide()
 

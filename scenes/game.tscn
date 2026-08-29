@@ -315,5 +315,4 @@ libraries/ = SubResource("AnimationLibrary_iywne")
 autoplay = &"move"
 
 [node name="Enemy" parent="." unique_id=494954956 instance=ExtResource("8_gee14")]
-position = Vector2(295, -11)
-hit_points = 100
+position = Vector2(288, -11)
