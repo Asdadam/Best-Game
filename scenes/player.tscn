@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bq80lari66dbr" path="res://assets/sprites/GERÇEK ANİMASYON-Recovered-Sheet.png" id="2_g2els"]
 [ext_resource type="Script" uid="uid://d177dtetftxki" path="res://scripts/hit_box.gd" id="3_qhqgy"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_fjrip"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dqkch"]
 radius = 6.0
 
 [sub_resource type="Animation" id="Animation_g2els"]
@@ -481,7 +481,7 @@ _data = {
 
 [node name="Player" type="CharacterBody2D" unique_id=1674891889 groups=["Player"]]
 z_index = 5
-collision_mask = 257
+collision_mask = 261
 script = ExtResource("1_g2els")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1365515956]
@@ -496,8 +496,8 @@ first_attack = NodePath("../firstAttack")
 second_attack = NodePath("../secondAttack")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2044286301]
-position = Vector2(0, -5)
-shape = SubResource("CircleShape2D_fjrip")
+position = Vector2(-1, -10)
+shape = SubResource("CapsuleShape2D_dqkch")
 
 [node name="Dash_duration" type="Timer" parent="." unique_id=2029626662]
 wait_time = 0.27

@@ -17,8 +17,10 @@ var target : Variant = null
 var player: Node2D = null
 var direction : int 
 var pursuing : bool = false
+var is_dead : bool = false
 
 func _ready() -> void:
+	is_dead = false
 	hp.text = str(hit_points)
 	animated_sprite_2d.animation_finished.connect(_on_animation_finished)
 	trigger_zone.body_entered.connect(_on_body_entered)
@@ -26,7 +28,12 @@ func _ready() -> void:
 	pursue_timer.timeout.connect(_on_pursue_ended)
 
 func _physics_process(delta: float) -> void:
+	if is_dead:
+		speed = 0.0
+		velocity.x = 0.0
+		
 	if hit_points <= 0:
+		is_dead = true
 		animated_sprite_2d.play("Death")
 	hp.text = str(hit_points)
 	
@@ -92,3 +99,7 @@ func _on_pursue_ended():
 
 func death():
 	queue_free()
+	
+func killzone_death():
+	animated_sprite_2d.play("Death")
+	

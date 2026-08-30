@@ -4,10 +4,14 @@ extends Area2D
 
  
 func _on_body_entered(body: Node2D):
-	print("You Died!")
-	Engine.time_scale = 0.5
-	body.get_node("CollisionShape2D").queue_free()
-	timer.start()
+	if body.is_in_group("Player"):
+		body.max_jump = 0
+		Engine.time_scale = 0.5
+		body.get_node("CollisionShape2D").queue_free()
+		timer.start()
+	elif body.is_in_group("Enemy"):
+		if body.has_method("killzone_death"):
+			body.killzone_death()
 
 
 func _on_timer_timeout():

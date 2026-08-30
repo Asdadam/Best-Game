@@ -30,6 +30,7 @@ MedievalBgTheme="*uid://b4fffkeedbpfs"
 [global_group]
 
 Player=""
+Enemy=""
 
 [input]
 
