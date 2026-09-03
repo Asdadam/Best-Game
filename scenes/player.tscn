@@ -183,9 +183,9 @@ region = Rect2(544, 0, 32, 32)
 atlas = ExtResource("2_qhqgy")
 region = Rect2(576, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wqfne"]
-atlas = ExtResource("2_qhqgy")
-region = Rect2(448, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_qlg0r"]
+atlas = ExtResource("4_qlg0r")
+region = Rect2(512, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tuyoq"]
 atlas = ExtResource("4_qlg0r")
@@ -223,9 +223,9 @@ region = Rect2(224, 0, 32, 32)
 atlas = ExtResource("4_qlg0r")
 region = Rect2(256, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dqkch"]
-atlas = ExtResource("2_qhqgy")
-region = Rect2(416, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_wqfne"]
+atlas = ExtResource("4_qlg0r")
+region = Rect2(480, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gl8cc"]
 atlas = ExtResource("4_qlg0r")
@@ -318,7 +318,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_wqfne")
+"texture": SubResource("AtlasTexture_qlg0r")
 }],
 "loop": 1,
 "name": &"falling",
@@ -358,7 +358,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_dqkch")
+"texture": SubResource("AtlasTexture_wqfne")
 }],
 "loop": 1,
 "name": &"jumping",
@@ -530,7 +530,7 @@ libraries/ = SubResource("AnimationLibrary_dqkch")
 z_as_relative = false
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_tuyoq")
-animation = &"run"
+animation = &"falling"
 autoplay = "idle"
 
 [node name="HitBox" type="Area2D" parent="Pivot" unique_id=2095427653]
