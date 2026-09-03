@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c2alt30soddna"
-path="res://.godot/imported/KARAKTER 2.0.png-33628717ac8ca2f44aee68d99902d123.ctex"
+uid="uid://bvcmsn3x2mdl5"
+path="res://.godot/imported/VERSİOBN 2 KARAKTER-Sheet.png-13f47ad7f8775e19d17b596534582792.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/KARAKTER 2.0.png"
-dest_files=["res://.godot/imported/KARAKTER 2.0.png-33628717ac8ca2f44aee68d99902d123.ctex"]
+source_file="res://assets/sprites/VERSİOBN 2 KARAKTER-Sheet.png"
+dest_files=["res://.godot/imported/VERSİOBN 2 KARAKTER-Sheet.png-13f47ad7f8775e19d17b596534582792.ctex"]
 
 [params]
 
