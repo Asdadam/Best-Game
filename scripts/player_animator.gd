@@ -6,6 +6,9 @@ class_name PlayerAnimator
 @export var first_attack: AnimationPlayer
 @export var second_attack: AnimationPlayer
 
+@onready var combat_manager: Node2D = $"../CombatManager"
+
+
 func _ready() -> void:
 	first_attack.animation_finished.connect(_on_animation_finished)
 	second_attack.animation_finished.connect(_on_animation_finished)
@@ -45,5 +48,5 @@ func stop_attack() -> void:
 	second_attack.stop()
 
 func _on_animation_finished(anim_name: StringName) -> void:
-	if anim_name == "attack" or anim_name == "secondAttack" or anim_name == "2Attack":
-		player.is_attacking = false
+	if anim_name == "attack" or anim_name == "secondAttack":
+		combat_manager.finish_attack()

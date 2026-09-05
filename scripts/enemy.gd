@@ -30,6 +30,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if is_dead:
 		speed = 0.0
+		move_and_slide()
 		velocity.x = 0.0
 		
 	if hit_points <= 0:
@@ -68,6 +69,7 @@ func _physics_process(delta: float) -> void:
 		
 		if is_against_wall and is_on_floor() and pursuing:
 			velocity.y = jump_velocity
+		
 	elif pursuing:
 		velocity.x = direction * speed
 	else:
@@ -88,7 +90,6 @@ func _on_body_entered(body : Node2D):
 
 func _on_body_exited(body : Node2D):
 	if body.is_in_group("Player"):
-
 		pursue_timer.start()
 		pursuing = true
 

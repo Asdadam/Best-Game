@@ -3,10 +3,119 @@
 [ext_resource type="Script" uid="uid://bhqlgaeisqull" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Script" uid="uid://r8na8phmbgon" path="res://scripts/player_animator.gd" id="2_dqkch"]
 [ext_resource type="Texture2D" uid="uid://bq80lari66dbr" path="res://assets/sprites/GERÇEK ANİMASYON-Recovered-Sheet.png" id="2_g2els"]
+[ext_resource type="Script" uid="uid://bvn18hlmgy3qb" path="res://scripts/Combat.gd" id="2_qlg0r"]
 [ext_resource type="Script" uid="uid://d177dtetftxki" path="res://scripts/hit_box.gd" id="3_qhqgy"]
+[ext_resource type="Script" uid="uid://bmgaxyag121cn" path="res://scripts/Movement.gd" id="6_tuyoq"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dqkch"]
-radius = 6.0
+[sub_resource type="Animation" id="Animation_dqkch"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/HitBox:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pivot/HitBox:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1.000001, -10)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Pivot/HitBox:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [4.7370834]
+}
+
+[sub_resource type="Animation" id="Animation_qlg0r"]
+resource_name = "secondAttack"
+length = 0.6
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/HitBox:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, true, true, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pivot/HitBox:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-1.000001, -10), Vector2(10.000001, -11), Vector2(7.000001, -16.000002), Vector2(7.000001, -16.000002), Vector2(0, -9)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Pivot/HitBox:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [4.7370834, 3.5945077, 1.5280805, 1.5280805, -1.5718763]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tuyoq"]
+_data = {
+&"RESET": SubResource("Animation_dqkch"),
+&"secondAttack": SubResource("Animation_qlg0r")
+}
 
 [sub_resource type="Animation" id="Animation_g2els"]
 length = 0.001
@@ -117,6 +226,9 @@ _data = {
 &"RESET": SubResource("Animation_g2els"),
 &"attack": SubResource("Animation_qhqgy")
 }
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dqkch"]
+radius = 6.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l71n6"]
 atlas = ExtResource("2_g2els")
@@ -369,120 +481,16 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1qvev"]
 size = Vector2(4, 14)
 
-[sub_resource type="Animation" id="Animation_dqkch"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Pivot/AnimatedSprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Pivot/HitBox:monitoring")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Pivot/HitBox:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-1.000001, -10)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Pivot/HitBox:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [4.7370834]
-}
-
-[sub_resource type="Animation" id="Animation_qlg0r"]
-resource_name = "secondAttack"
-length = 0.6
-step = 1.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Pivot/AnimatedSprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Pivot/HitBox:monitoring")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [true, true, true, true, false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Pivot/HitBox:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(-1.000001, -10), Vector2(10.000001, -11), Vector2(7.000001, -16.000002), Vector2(7.000001, -16.000002), Vector2(0, -9)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Pivot/HitBox:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [4.7370834, 3.5945077, 1.5280805, 1.5280805, -1.5718763]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_tuyoq"]
-_data = {
-&"RESET": SubResource("Animation_dqkch"),
-&"secondAttack": SubResource("Animation_qlg0r")
-}
-
 [node name="Player" type="CharacterBody2D" unique_id=1674891889 groups=["Player"]]
 z_index = 5
 collision_mask = 261
 script = ExtResource("1_g2els")
+
+[node name="CombatManager" type="Node2D" parent="." unique_id=604896519]
+script = ExtResource("2_qlg0r")
+
+[node name="combo_timer" type="Timer" parent="CombatManager" unique_id=1319649054]
+wait_time = 0.3
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1365515956]
 offset = Vector2(0, 4)
@@ -492,19 +500,20 @@ zoom = Vector2(4, 4)
 script = ExtResource("2_dqkch")
 player = NodePath("..")
 animated_sprite = NodePath("../Pivot/AnimatedSprite2D")
-first_attack = NodePath("../firstAttack")
-second_attack = NodePath("../secondAttack")
+first_attack = NodePath("firstAttack")
+second_attack = NodePath("secondAttack")
+
+[node name="secondAttack" type="AnimationPlayer" parent="PlayerAnimator" unique_id=1120189002]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_tuyoq")
+
+[node name="firstAttack" type="AnimationPlayer" parent="PlayerAnimator" unique_id=1901249055]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_dqkch")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2044286301]
 position = Vector2(-1, -10)
 shape = SubResource("CapsuleShape2D_dqkch")
-
-[node name="Dash_duration" type="Timer" parent="." unique_id=2029626662]
-wait_time = 0.27
-one_shot = true
-
-[node name="Dash_cd" type="Timer" parent="." unique_id=501459492]
-wait_time = 0.15
 
 [node name="LeftRay" type="RayCast2D" parent="." unique_id=885573093]
 position = Vector2(0, -5)
@@ -513,9 +522,6 @@ target_position = Vector2(-10, 0)
 [node name="RightRay" type="RayCast2D" parent="." unique_id=788432054]
 position = Vector2(0, -5)
 target_position = Vector2(10, 0)
-
-[node name="firstAttack" type="AnimationPlayer" parent="." unique_id=1901249055]
-libraries/ = SubResource("AnimationLibrary_dqkch")
 
 [node name="Pivot" type="Node2D" parent="." unique_id=1317371156]
 
@@ -526,8 +532,8 @@ animation = &"idle"
 autoplay = "idle"
 
 [node name="HitBox" type="Area2D" parent="Pivot" unique_id=2095427653]
-position = Vector2(-1.000001, -10)
-rotation = 4.7370834
+position = Vector2(-8.000001, -17)
+rotation = 1.0
 scale = Vector2(0.99999976, 0.99999976)
 collision_layer = 0
 collision_mask = 16
@@ -539,13 +545,17 @@ script = ExtResource("3_qhqgy")
 position = Vector2(-0.12407011, -7.2100368)
 shape = SubResource("RectangleShape2D_1qvev")
 
-[node name="secondAttack" type="AnimationPlayer" parent="." unique_id=1120189002]
-libraries/ = SubResource("AnimationLibrary_tuyoq")
+[node name="MovementManager" type="Node2D" parent="." unique_id=1441083371]
+script = ExtResource("6_tuyoq")
 
-[node name="combo_timer" type="Timer" parent="." unique_id=1702492067]
-wait_time = 0.7
+[node name="Down_cd" type="Timer" parent="MovementManager" unique_id=1175457806]
+wait_time = 0.08
 
-[node name="Down_cd" type="Timer" parent="." unique_id=1175457806]
+[node name="Dash_duration" type="Timer" parent="MovementManager" unique_id=2029626662]
+wait_time = 0.27
+one_shot = true
+
+[node name="Dash_cd" type="Timer" parent="MovementManager" unique_id=501459492]
 wait_time = 0.15
 
 [connection signal="area_entered" from="Pivot/HitBox" to="Pivot/HitBox" method="_on_area_entered"]
