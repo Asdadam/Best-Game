@@ -5,7 +5,11 @@ extends Area2D
  
 func _on_body_entered(body: Node2D):
 	if body.is_in_group("Player"):
-		body.max_jump = 0
+		body.can_dash_air = false
+		body.is_attacking = true
+		body.set_process(false)
+		var movement_manager = body.get_child(7)#Movement Managerın indexi
+		movement_manager.max_jump = 0
 		Engine.time_scale = 0.5
 		body.get_node("CollisionShape2D").queue_free()
 		timer.start()

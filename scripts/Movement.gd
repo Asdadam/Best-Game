@@ -22,6 +22,8 @@ var coyote_timer : float = 0.0
 var dash_dir : float = 0.0
 var jump_counter : float = 0.0
 var max_jump : int = 2
+var acceleration : float = 1200.0
+var friction : float = 600.0
 
 func _ready() -> void:
 	dash_duration.timeout.connect(_on_dash_timer_timeout)
@@ -33,6 +35,12 @@ func _physics_process(delta: float) -> void:
 	
 	if wall_jump_timer > 0:
 		wall_jump_timer -= delta
+	
+	if player.direction != 0:
+		player.velocity.x = move_toward(player.velocity.x, SPEED * player.direction,acceleration * delta)
+	else:
+		player.velocity.x = move_toward(player.velocity.x, 0, friction * delta)
+	
 	
 	var wall_normal := player.get_wall_normal().x
 	var is_against_wall := player.is_on_wall() and ((player.direction > 0 and wall_normal < 0) or (player.direction < 0 and wall_normal > 0))
@@ -80,7 +88,7 @@ func _physics_process(delta: float) -> void:
 		dash_dir = player.direction if player.direction != 0 else (-1.0 if player.pivot.scale.x == -1 else 1.0)
 		if player.is_on_wall() and not player.is_on_floor():
 			if  Input.is_key_pressed(KEY_A) or Input.is_key_pressed(KEY_D):
-				dash_dir *= -1
+				dash_dir = dash_dir * -1
 		player.dashing = true
 		dash_duration.start()
 
@@ -91,9 +99,9 @@ func _physics_process(delta: float) -> void:
 		player.velocity.y = 0
 	elif wall_jump_timer <= 0:
 		if player.direction != 0:
-			player.velocity.x = player.direction * SPEED
+			player.velocity.x = move_toward(player.velocity.x, SPEED * player.direction,acceleration * delta)
 		else:
-			player.velocity.x = move_toward(player.velocity.x, 0, SPEED)
+			player.velocity.x = move_toward(player.velocity.x, 0, friction * delta)
 	
 	if Input.is_action_just_pressed("move_down"):
 		move_down()

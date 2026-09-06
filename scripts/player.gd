@@ -31,11 +31,11 @@ var falling : bool = false
 var can_down := true
 
 
-func _physics_process(_delta: float) -> void:
+func _process(_delta: float) -> void:
 	direction = Input.get_axis("move_left", "move_right")
-	if direction > 0:
+	if direction > 0 and not dashing:
 		pivot.scale.x = 1
-	elif direction < 0:
+	elif direction < 0 and not dashing:
 		pivot.scale.x = -1
 	if Input.is_action_just_pressed("move_down") and down_cd.time_left <= 0:
 		down_cd.start()

@@ -7,6 +7,7 @@ extends CharacterBody2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var trigger_zone: Area2D = $TriggerZone
 @onready var pursue_timer: Timer = $PursueTimer
+@onready var hurtbox: Area2D = $Hurtbox
 
 
 @export var speed : float = 65.0
@@ -29,10 +30,13 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if is_dead:
+		set_physics_process(false)
+		hurtbox.monitorable = false
+		trigger_zone.monitoring = false
 		speed = 0.0
-		move_and_slide()
 		velocity.x = 0.0
-		
+		move_and_slide()
+
 	if hit_points <= 0:
 		is_dead = true
 		animated_sprite_2d.play("Death")
