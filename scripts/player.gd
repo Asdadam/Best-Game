@@ -33,9 +33,15 @@ var can_down := true
 
 func _process(_delta: float) -> void:
 	direction = Input.get_axis("move_left", "move_right")
+	get_platform()
 	if direction > 0 and not dashing:
 		pivot.scale.x = 1
 	elif direction < 0 and not dashing:
 		pivot.scale.x = -1
 	if Input.is_action_just_pressed("move_down") and down_cd.time_left <= 0:
 		down_cd.start()
+
+func get_platform() -> Node2D:
+	if get_last_slide_collision() != null:
+		return get_last_slide_collision().get_collider()
+	return null

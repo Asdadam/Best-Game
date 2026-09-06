@@ -8,7 +8,7 @@ extends Node2D
 @onready var dash_cd: Timer = $Dash_cd
 
 
-const SPEED : float = 130.0
+const SPEED : float = 160.0
 const JUMP_VELOCITY : float = -300.0
 const DASH_SPEED : float = 260.0
 const WALL_SLIDE_SPEED : float = 40.0
@@ -20,10 +20,11 @@ const COYOTE_TIME : float = 0.2
 var wall_jump_timer : float = 0.0
 var coyote_timer : float = 0.0
 var dash_dir : float = 0.0
-var jump_counter : float = 0.0
-var max_jump : int = 2
-var acceleration : float = 1200.0
-var friction : float = 600.0
+var jumps_left : int = 0
+
+@export var acceleration : float = 1200.0
+@export var friction : float = 250.0
+@export var max_jump : int = 3
 
 func _ready() -> void:
 	dash_duration.timeout.connect(_on_dash_timer_timeout)
@@ -47,7 +48,7 @@ func _physics_process(delta: float) -> void:
 	var airborn := not player.is_on_floor() and not player.is_on_wall()
 	
 	if player.is_on_floor() or is_against_wall or player.is_on_wall():
-		max_jump = 2
+		jumps_left = max_jump
 		player.can_dash_air = true
 		
 	
@@ -64,19 +65,19 @@ func _physics_process(delta: float) -> void:
 		coyote_timer = COYOTE_TIME
 
 	if Input.is_action_just_pressed("Jump"):
-		if airborn and max_jump == 2:
-			max_jump -= 1
+		if airborn and jumps_left == max_jump:
+			jumps_left -= 1
 		
-		if player.is_on_floor() and max_jump > 0:
-			max_jump -= 1
+		if player.is_on_floor() and jumps_left > 0:
+			jumps_left -= 1
 			player.velocity.y = JUMP_VELOCITY
-		elif player.is_on_wall() and not player.is_on_floor() and max_jump > 0:
-			max_jump -= 1
+		elif player.is_on_wall() and not player.is_on_floor() and jumps_left > 0:
+			jumps_left -= 1
 			player.velocity.y = WALL_JUMP_VELOCITY.y
 			player.velocity.x = wall_normal * WALL_JUMP_VELOCITY.x
 			wall_jump_timer = WALL_JUMP_LOCK_TIME
-		elif not player.is_on_wall() and not player.is_on_floor() and max_jump > 0:
-			max_jump -= 1
+		elif not player.is_on_wall() and not player.is_on_floor() and jumps_left > 0:
+			jumps_left -= 1
 			player.velocity.y = JUMP_VELOCITY
 
 	if Input.is_action_just_pressed("dash") and not player.dashing and player.can_dash and player.can_dash_air:

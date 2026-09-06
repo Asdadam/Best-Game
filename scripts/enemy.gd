@@ -8,6 +8,7 @@ extends CharacterBody2D
 @onready var trigger_zone: Area2D = $TriggerZone
 @onready var pursue_timer: Timer = $PursueTimer
 @onready var hurtbox: Area2D = $Hurtbox
+@onready var ceiling_detector: RayCast2D = $CeilingDetector
 
 
 @export var speed : float = 65.0
@@ -19,7 +20,8 @@ var player: Node2D = null
 var direction : int 
 var pursuing : bool = false
 var is_dead : bool = false
-
+var platform : Node2D = null
+var player_above : bool = false
 func _ready() -> void:
 	is_dead = false
 	hp.text = str(hit_points)
@@ -29,6 +31,9 @@ func _ready() -> void:
 	pursue_timer.timeout.connect(_on_pursue_ended)
 
 func _physics_process(delta: float) -> void:
+	if player:
+		player_above = player.position.y - position.y < 0
+		platform = player.get_platform()
 	if is_dead:
 		set_physics_process(false)
 		hurtbox.monitorable = false
@@ -41,6 +46,11 @@ func _physics_process(delta: float) -> void:
 		is_dead = true
 		animated_sprite_2d.play("Death")
 	hp.text = str(hit_points)
+	
+	if ceiling_detector.is_colliding():
+		var collider = ceiling_detector.get_collider()
+		if collider == platform and player_above:
+			stop_chase()
 	
 	if not is_on_floor():
 		velocity.y += get_gravity().y * delta
@@ -108,3 +118,6 @@ func death():
 func killzone_death():
 	animated_sprite_2d.play("Death")
 	
+func stop_chase() -> void:
+	target = null
+	player = null

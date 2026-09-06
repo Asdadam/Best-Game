@@ -89,7 +89,6 @@ collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_md0e3")
 hit_points = 200
-speed = 40.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1022302942]
 sprite_frames = SubResource("SpriteFrames_moenx")
@@ -124,4 +123,8 @@ position = Vector2(0, 5.5)
 shape = SubResource("RectangleShape2D_moenx")
 
 [node name="PursueTimer" type="Timer" parent="." unique_id=1858070818]
-wait_time = 3.0
+wait_time = 2.0
+
+[node name="CeilingDetector" type="RayCast2D" parent="." unique_id=688100705]
+target_position = Vector2(0, -50)
+collision_mask = 260
