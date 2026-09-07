@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @export_category("Stats")
 
-@export var hit_points : int = 50
+
 @onready var hp: Label = $HP
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var trigger_zone: Area2D = $TriggerZone
@@ -10,7 +10,7 @@ extends CharacterBody2D
 @onready var hurtbox: Area2D = $Hurtbox
 @onready var ceiling_detector: RayCast2D = $CeilingDetector
 
-
+@export var hit_points : int = 50
 @export var speed : float = 65.0
 @export var stoping_distance : float = 8.0
 @export var jump_velocity : float = -300.0

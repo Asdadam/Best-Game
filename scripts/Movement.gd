@@ -8,23 +8,28 @@ extends Node2D
 @onready var dash_cd: Timer = $Dash_cd
 
 
-const SPEED : float = 160.0
-const JUMP_VELOCITY : float = -300.0
-const DASH_SPEED : float = 260.0
-const WALL_SLIDE_SPEED : float = 40.0
-const WALL_CLIMB_SPEED : float = -90.0
-const WALL_JUMP_VELOCITY : Vector2 = Vector2(220.0, -280.0)
-const WALL_JUMP_LOCK_TIME : float = 0.1
-const COYOTE_TIME : float = 0.2
-
-var wall_jump_timer : float = 0.0
-var coyote_timer : float = 0.0
-var dash_dir : float = 0.0
-var jumps_left : int = 0
-
+@export var SPEED : float = 160.0
+@export var JUMP_VELOCITY : float = -300.0
+@export var DASH_SPEED : float = 260.0
+@export var WALL_SLIDE_SPEED : float = 40.0
+@export var WALL_CLIMB_SPEED : float = -90.0
+@export var WALL_JUMP_VELOCITY : Vector2 = Vector2(220.0, -280.0)
+@export var WALL_JUMP_LOCK_TIME : float = 0.1
+@export var COYOTE_TIME : float = 0.2
+@export var WALL_STAND_TIME : float = 0.1
+@export var JUMP_GRACE : float = 0.2
 @export var acceleration : float = 1200.0
 @export var friction : float = 250.0
 @export var max_jump : int = 3
+
+
+var wall_jump_timer : float = 0.0
+var wall_stand_timer : float = 0.0
+var coyote_timer : float = 0.0
+var dash_dir : float = 0.0
+var jumps_left : int = 0
+var was_on_wall : bool = false
+var jump_grace_timer : float = 0.0
 
 func _ready() -> void:
 	dash_duration.timeout.connect(_on_dash_timer_timeout)
@@ -37,10 +42,6 @@ func _physics_process(delta: float) -> void:
 	if wall_jump_timer > 0:
 		wall_jump_timer -= delta
 	
-	if player.direction != 0:
-		player.velocity.x = move_toward(player.velocity.x, SPEED * player.direction,acceleration * delta)
-	else:
-		player.velocity.x = move_toward(player.velocity.x, 0, friction * delta)
 	
 	
 	var wall_normal := player.get_wall_normal().x
@@ -50,33 +51,55 @@ func _physics_process(delta: float) -> void:
 	if player.is_on_floor() or is_against_wall or player.is_on_wall():
 		jumps_left = max_jump
 		player.can_dash_air = true
-		
+	
+	if jump_grace_timer > 0:
+		jump_grace_timer -= delta
+	
 	
 	if not player.is_on_floor():
 		coyote_timer -= delta
-		if is_against_wall and coyote_timer <= 0:
+		
+		var can_wall_action : bool = is_against_wall and jump_grace_timer <= 0.0
+		
+		if can_wall_action:
+			if not was_on_wall and player.velocity.y >= 0:
+				wall_stand_timer = WALL_STAND_TIME
+				player.velocity.y = 0.0
+			was_on_wall = true
+		
+		if is_against_wall and coyote_timer <= 0 and jump_grace_timer:
 			if Input.is_action_pressed("WallClimb"):
 				player.velocity.y = WALL_CLIMB_SPEED 
+				wall_stand_timer = 0.0
+			elif wall_stand_timer > 0.0:
+				player.velocity.y = 0
+				wall_stand_timer -= delta
 			else:
-				player.velocity.y = WALL_SLIDE_SPEED 
+				player.velocity.y = WALL_SLIDE_SPEED
 		else:
+			was_on_wall = false
+			wall_stand_timer = 0.0
 			player.velocity.y += player.get_gravity().y * delta
 	else:
 		coyote_timer = COYOTE_TIME
+		was_on_wall = false
+		wall_stand_timer = 0.0
 
 	if Input.is_action_just_pressed("Jump"):
+		jump_grace_timer = JUMP_GRACE
 		if airborn and jumps_left == max_jump:
 			jumps_left -= 1
 		
-		if player.is_on_floor() and jumps_left > 0:
+		if player.is_on_floor() or coyote_timer > 0.0 and not player.is_on_wall():
+			coyote_timer = 0.0
 			jumps_left -= 1
 			player.velocity.y = JUMP_VELOCITY
-		elif player.is_on_wall() and not player.is_on_floor() and jumps_left > 0:
+		elif player.is_on_wall() and not player.is_on_floor():
 			jumps_left -= 1
 			player.velocity.y = WALL_JUMP_VELOCITY.y
 			player.velocity.x = wall_normal * WALL_JUMP_VELOCITY.x
 			wall_jump_timer = WALL_JUMP_LOCK_TIME
-		elif not player.is_on_wall() and not player.is_on_floor() and jumps_left > 0:
+		elif jumps_left > 0:
 			jumps_left -= 1
 			player.velocity.y = JUMP_VELOCITY
 
