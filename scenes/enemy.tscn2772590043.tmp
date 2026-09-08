@@ -82,11 +82,9 @@ height = 24.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_moenx"]
 size = Vector2(92, 11)
 
-[node name="Enemy" type="CharacterBody2D" unique_id=494954956 groups=["Enemy"]]
-z_index = 6
+[node name="Enemy" type="CharacterBody2D" unique_id=494954956]
 scale = Vector2(-1, 1)
-collision_layer = 2
-collision_mask = 4
+collision_layer = 0
 script = ExtResource("1_md0e3")
 hit_points = 200
 
@@ -96,7 +94,7 @@ animation = &"Death"
 autoplay = "Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=951836612]
-position = Vector2(0, 5)
+position = Vector2(0, 9)
 shape = SubResource("CircleShape2D_moenx")
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=1446545293]
@@ -123,8 +121,4 @@ position = Vector2(0, 5.5)
 shape = SubResource("RectangleShape2D_moenx")
 
 [node name="PursueTimer" type="Timer" parent="." unique_id=1858070818]
-wait_time = 2.0
-
-[node name="CeilingDetector" type="RayCast2D" parent="." unique_id=688100705]
-target_position = Vector2(0, -50)
-collision_mask = 260
+wait_time = 3.0
