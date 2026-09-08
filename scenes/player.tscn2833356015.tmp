@@ -552,10 +552,7 @@ shape = SubResource("RectangleShape2D_1qvev")
 
 [node name="MovementManager" type="Node2D" parent="." unique_id=1441083371]
 script = ExtResource("6_tuyoq")
-WALL_JUMP_VELOCITY = Vector2(150, -280)
-WALL_STAND_TIME = 0.2
-JUMP_GRACE = 0.1
-friction = 600.0
+friction = 350.0
 max_jump = 2
 
 [node name="Down_cd" type="Timer" parent="MovementManager" unique_id=1175457806]
