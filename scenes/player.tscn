@@ -526,7 +526,7 @@ wait_time = 0.5
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1365515956]
 offset = Vector2(0, 4)
-zoom = Vector2(4, 4)
+zoom = Vector2(3, 3)
 process_callback = 0
 position_smoothing_enabled = true
 

@@ -25,7 +25,7 @@ buses/default_bus_layout="uid://dhgcsx13geh8s"
 
 [autoload]
 
-MedievalBgTheme="*uid://b4fffkeedbpfs"
+AudioManager="*uid://clgdca3o16av4"
 
 [global_group]
 
