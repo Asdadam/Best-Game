@@ -129,3 +129,6 @@ wait_time = 2.0
 [node name="CeilingDetector" type="RayCast2D" parent="." unique_id=688100705]
 target_position = Vector2(0, -50)
 collision_mask = 260
+
+[node name="damage_taken_timer" type="Timer" parent="." unique_id=842879218]
+wait_time = 0.5

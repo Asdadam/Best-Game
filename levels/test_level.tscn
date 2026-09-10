@@ -25,6 +25,10 @@ tile_set = SubResource("TileSet_ycyol")
 
 [node name="Player" parent="." unique_id=1674891889 instance=ExtResource("2_w7r7j")]
 position = Vector2(-248, 573)
+camera_left_limit = -302
+camera_top_limit = -100000000000000000
+camera_right_limit = 1552
+camera_bottom_limit = 585
 
 [node name="Enemies" type="Node" parent="." unique_id=1720623804]
 

@@ -9,12 +9,14 @@ extends CharacterBody2D
 @onready var pursue_timer: Timer = $PursueTimer
 @onready var hurtbox: Area2D = $Hurtbox
 @onready var ceiling_detector: RayCast2D = $CeilingDetector
+@onready var damage_taken_timer: Timer = $damage_taken_timer
 
 @export var hit_points : int = 50
 @export var speed : float = 65.0
 @export var stoping_distance : float = 8.0
 @export var jump_velocity : float = -300.0
 
+var dir : float
 var target : Variant = null
 var player: Node2D = null
 var direction : int 
@@ -22,9 +24,13 @@ var pursuing : bool = false
 var is_dead : bool = false
 var platform : Node2D = null
 var player_above : bool = false
+var has_damaged : bool = false
+var acceleration : float = 40.0
+var friction : float = 15.0
 func _ready() -> void:
 	is_dead = false
 	hp.text = str(hit_points)
+	damage_taken_timer.timeout.connect(_on_damage_taken_timeout)
 	animated_sprite_2d.animation_finished.connect(_on_animation_finished)
 	trigger_zone.body_entered.connect(_on_body_entered)
 	trigger_zone.body_exited.connect(_on_body_exited)
@@ -73,8 +79,8 @@ func _physics_process(delta: float) -> void:
 		var distance : float = target - global_position.x
 		
 		if abs(distance) > stoping_distance:
-			var dir : float = sign(distance)
-			velocity.x = dir * speed
+			dir = sign(distance)
+			velocity.x = move_toward(velocity.x, speed * dir, acceleration * delta)
 			
 			if dir >= 0:
 				animated_sprite_2d.flip_h = true
@@ -85,12 +91,19 @@ func _physics_process(delta: float) -> void:
 			velocity.y = jump_velocity
 		
 	elif pursuing:
-		velocity.x = direction * speed
+		velocity.x = move_toward(velocity.x, speed * dir, acceleration * delta)
 	else:
-		velocity.x = 0
+		velocity.x = move_toward(velocity.x, 0, friction * delta)
 	move_and_slide()
-func take_damage(damage_taken : int):
-	hit_points -= damage_taken
+func take_damage(damage_taken : int) -> void:
+	if not has_damaged:
+		has_damaged = true
+		hit_points -= damage_taken
+		damage_taken_timer.start()
+	
+
+func _on_damage_taken_timeout() -> void:
+	has_damaged = false
 
 func _on_animation_finished():
 	if animated_sprite_2d.animation == "Death":

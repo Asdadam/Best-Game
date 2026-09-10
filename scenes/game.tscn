@@ -1,6 +1,5 @@
 [gd_scene format=4 uid="uid://c66f2tiagg1sr"]
 
-[ext_resource type="Script" uid="uid://runupwihunil" path="res://scripts/game.gd" id="1_gee14"]
 [ext_resource type="PackedScene" uid="uid://c3uhjq5jqfrbf" path="res://scenes/game_manager.tscn" id="1_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://b3hjlgmu1lcvb" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://dtdncmd6dus80" path="res://assets/sprites/world_tileset.png" id="2_yqjtg"]
@@ -8,6 +7,21 @@
 [ext_resource type="PackedScene" uid="uid://dvh1kxc2hijxo" path="res://scenes/coin.tscn" id="4_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://btvetxn3a0nfn" path="res://scenes/killzone.tscn" id="5_iywne"]
 [ext_resource type="PackedScene" uid="uid://by7we5eb5m8op" path="res://scenes/enemy.tscn" id="8_gee14"]
+
+[sub_resource type="GDScript" id="GDScript_u5sy4"]
+script/source = "extends Node2D
+
+@onready var player: Player_Controller = $Player
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	var camera: Camera2D = player.get_node_or_null(\"Camera2D\")	
+	
+	camera.limit_left = -150
+	camera.limit_top = -255
+	camera.limit_right = 815
+	camera.limit_bottom = 150
+"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnu2h"]
 texture = ExtResource("2_yqjtg")
@@ -216,9 +230,10 @@ _data = {
 }
 
 [node name="Game" type="Node2D" unique_id=1005232726]
-script = ExtResource("1_gee14")
+script = SubResource("GDScript_u5sy4")
 
 [node name="GameManager" parent="." unique_id=2139347479 instance=ExtResource("1_u5sy4")]
+script = null
 
 [node name="TileMap" type="TileMap" parent="." unique_id=1014399883]
 tile_set = SubResource("TileSet_lbhrr")
@@ -236,6 +251,10 @@ tile_set = SubResource("TileSet_lbhrr")
 
 [node name="Player" parent="." unique_id=1311812276 instance=ExtResource("1_uwrxv")]
 position = Vector2(32, 76)
+camera_left_limit = -112
+camera_top_limit = -100000000000000000
+camera_right_limit = 623
+camera_bottom_limit = 670
 metadata/_edit_group_ = true
 
 [node name="Killzone" parent="." unique_id=1637326944 instance=ExtResource("5_iywne")]
