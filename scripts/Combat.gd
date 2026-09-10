@@ -12,7 +12,7 @@ func _ready() -> void:
 	combo_timer.timeout.connect(_on_combo_finished)
 	damage_dealt_timer.timeout.connect(hit_box._on_damage_dealt_timeout)
 
-func _unhandled_input(_event: InputEvent) -> void:
+func _process(_delta: float) -> void:
 	start_attack()
 
 

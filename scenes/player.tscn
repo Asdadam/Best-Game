@@ -166,7 +166,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [true]
+"values": [1.5920503]
 }
 
 [sub_resource type="Animation" id="Animation_qhqgy"]
@@ -207,7 +207,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [-1.4992378, 1.5582703, 1.5844504, -3.1110024, -3.1321769, -3.1163957]
+"values": [-1.4992378, 1.5920503, 1.5844504, -3.1110024, -3.1321769, -3.1163957]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -547,6 +547,7 @@ libraries/ = SubResource("AnimationLibrary_dqkch")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2044286301]
 position = Vector2(-1, -10)
+scale = Vector2(0.75, 0.75)
 shape = SubResource("CapsuleShape2D_dqkch")
 
 [node name="LeftRay" type="RayCast2D" parent="." unique_id=885573093]
@@ -567,8 +568,8 @@ autoplay = "idle"
 
 [node name="HitBox" type="Area2D" parent="Pivot" unique_id=2095427653]
 position = Vector2(-8.000001, -17)
-rotation = 1.0
-scale = Vector2(0.99999976, 0.99999976)
+rotation = 1.5920503
+scale = Vector2(1, 2)
 collision_layer = 0
 collision_mask = 16
 input_pickable = false

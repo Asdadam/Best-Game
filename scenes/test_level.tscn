@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://dkt6lw510hyq0"]
 
 [ext_resource type="PackedScene" uid="uid://b3hjlgmu1lcvb" path="res://scenes/player.tscn" id="1_2venv"]
-[ext_resource type="Script" uid="uid://dhjyj02w5h4rk" path="res://scenes/test_level.gd" id="1_paw1w"]
+[ext_resource type="Script" uid="uid://dhjyj02w5h4rk" path="res://scripts/test_level.gd" id="1_paw1w"]
 [ext_resource type="PackedScene" uid="uid://by7we5eb5m8op" path="res://scenes/enemy.tscn" id="3_x4b8f"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_paw1w"]
@@ -24,7 +24,7 @@ tile_map_data = PackedByteArray("AAAAACQAAAAAAAAAAAABACQAAAAAAAAAAAACACQAAAAAAAA
 tile_set = SubResource("TileSet_ycyol")
 
 [node name="Player" parent="." unique_id=1674891889 instance=ExtResource("1_2venv")]
-position = Vector2(-251, 551)
+position = Vector2(-248, 573)
 
 [node name="Enemies" type="Node" parent="." unique_id=1720623804]
 

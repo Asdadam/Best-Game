@@ -97,13 +97,13 @@ func _on_animation_finished():
 		death()
 
 func _on_body_entered(body : Node2D):
-	if body.is_in_group("Player"):
+	if body.is_in_group("Player") and pursue_timer.is_inside_tree():
 		pursue_timer.stop()
 		player = body
 		pursuing = false
 
 func _on_body_exited(body : Node2D):
-	if body.is_in_group("Player"):
+	if body.is_in_group("Player") and pursue_timer.is_inside_tree():
 		pursue_timer.start()
 		pursuing = true
 
