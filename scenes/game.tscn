@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://c66f2tiagg1sr"]
 
+[ext_resource type="Script" uid="uid://runupwihunil" path="res://scripts/game.gd" id="1_gee14"]
 [ext_resource type="PackedScene" uid="uid://c3uhjq5jqfrbf" path="res://scenes/game_manager.tscn" id="1_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://b3hjlgmu1lcvb" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://dtdncmd6dus80" path="res://assets/sprites/world_tileset.png" id="2_yqjtg"]
@@ -215,6 +216,7 @@ _data = {
 }
 
 [node name="Game" type="Node2D" unique_id=1005232726]
+script = ExtResource("1_gee14")
 
 [node name="GameManager" parent="." unique_id=2139347479 instance=ExtResource("1_u5sy4")]
 

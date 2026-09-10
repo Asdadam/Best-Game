@@ -4,7 +4,7 @@ var score = 0
 var typing: String = "" # Hile kodu gibi yazılar yazmak için.
 var curr_scene_file_path : String = ""
 var largest_mode : int = 0
-@onready var score_label: Label = $ScoreLabel
+
 
 
 
@@ -14,14 +14,11 @@ func _process(_delta: float) -> void:
 
 func _ready() -> void:
 	AudioManager.play_music(AudioManager.medieval_bg)
-	var dev_modes = ["r", "test", "main"]
+	var dev_modes = ["rel", "test", "main"]
 	for i in dev_modes:
 		if i.length() > largest_mode:
 			largest_mode = i.length()
 
-func add_point():
-	score += 1
-	score_label.text = "You Collected " + str(score) + " coins."
 
 func _unhandled_input(event):
 	if event is InputEventKey and event.pressed and not event.echo:
@@ -35,10 +32,10 @@ func _unhandled_input(event):
 			typing = ""
 			Transitioner.get_child(0).change_scene("res://scenes/game.tscn")
 			curr_scene_file_path = "res://scenes/game.tscn"
-		if typing.ends_with("test") and curr_scene_file_path != "res://scenes/test_level.tscn":
+		if typing.ends_with("test") and curr_scene_file_path != "res://levels/test_level.tscn":
 			typing = ""
-			Transitioner.get_child(0).change_scene("res://scenes/test_level.tscn")
-			curr_scene_file_path = "res://scenes/test_level.tscn"
+			Transitioner.get_child(0).change_scene("res://levels/test_level.tscn")
+			curr_scene_file_path = "res://levels/test_level.tscn"
 		if typing.ends_with("rel"):
 			typing = ""
 			Transitioner.get_child(0).change_scene(curr_scene_file_path)

@@ -524,12 +524,6 @@ wait_time = 0.3
 [node name="damage_dealt" type="Timer" parent="CombatManager" unique_id=1071372147]
 wait_time = 0.5
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1365515956]
-offset = Vector2(0, 4)
-zoom = Vector2(3, 3)
-process_callback = 0
-position_smoothing_enabled = true
-
 [node name="PlayerAnimator" type="Node2D" parent="." unique_id=560960882 node_paths=PackedStringArray("player", "animated_sprite", "first_attack", "second_attack")]
 script = ExtResource("2_dqkch")
 player = NodePath("..")
@@ -597,5 +591,15 @@ one_shot = true
 
 [node name="Dash_cd" type="Timer" parent="MovementManager" unique_id=501459492]
 wait_time = 0.15
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=94927183]
+offset = Vector2(0, 4)
+zoom = Vector2(3.5, 3.5)
+process_callback = 0
+limit_left = -150
+limit_top = -255
+limit_right = 815
+limit_bottom = 150
+position_smoothing_enabled = true
 
 [connection signal="area_entered" from="Pivot/HitBox" to="Pivot/HitBox" method="_on_area_entered"]
