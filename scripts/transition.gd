@@ -3,7 +3,10 @@ extends ColorRect
 @onready var color_rect: ColorRect = $"."
 
 
+
+
 func change_scene(destination_scene : String) -> void:
+	
 	var fade_in : Tween = create_tween()
 	fade_in.tween_property(color_rect, "modulate:a", 1, 1.0)
 	await fade_in.finished

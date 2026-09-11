@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://c66f2tiagg1sr"]
 
+[ext_resource type="Script" uid="uid://clkb6w1bjci3b" path="res://scripts/game.gd" id="1_gee14"]
 [ext_resource type="PackedScene" uid="uid://c3uhjq5jqfrbf" path="res://scenes/game_manager.tscn" id="1_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://b3hjlgmu1lcvb" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://dtdncmd6dus80" path="res://assets/sprites/world_tileset.png" id="2_yqjtg"]
@@ -7,21 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dvh1kxc2hijxo" path="res://scenes/coin.tscn" id="4_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://btvetxn3a0nfn" path="res://scenes/killzone.tscn" id="5_iywne"]
 [ext_resource type="PackedScene" uid="uid://by7we5eb5m8op" path="res://scenes/enemy.tscn" id="8_gee14"]
-
-[sub_resource type="GDScript" id="GDScript_u5sy4"]
-script/source = "extends Node2D
-
-@onready var player: Player_Controller = $Player
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	var camera: Camera2D = player.get_node_or_null(\"Camera2D\")	
-	
-	camera.limit_left = -150
-	camera.limit_top = -255
-	camera.limit_right = 815
-	camera.limit_bottom = 150
-"
+[ext_resource type="PackedScene" uid="uid://chn3noqafxcul" path="res://scenes/transition_manager.tscn" id="9_0tnpc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnu2h"]
 texture = ExtResource("2_yqjtg")
@@ -229,11 +216,11 @@ _data = {
 &"move": SubResource("Animation_lnu2h")
 }
 
-[node name="Game" type="Node2D" unique_id=1005232726]
-script = SubResource("GDScript_u5sy4")
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_moenx"]
+size = Vector2(10, 33)
 
-[node name="GameManager" parent="." unique_id=2139347479 instance=ExtResource("1_u5sy4")]
-script = null
+[node name="Game" type="Node2D" unique_id=1005232726]
+script = ExtResource("1_gee14")
 
 [node name="TileMap" type="TileMap" parent="." unique_id=1014399883]
 tile_set = SubResource("TileSet_lbhrr")
@@ -254,7 +241,7 @@ position = Vector2(32, 76)
 camera_left_limit = -112
 camera_top_limit = -100000000000000000
 camera_right_limit = 623
-camera_bottom_limit = 670
+camera_bottom_limit = 150
 metadata/_edit_group_ = true
 
 [node name="Killzone" parent="." unique_id=1637326944 instance=ExtResource("5_iywne")]
@@ -329,3 +316,17 @@ autoplay = &"move"
 [node name="Enemy" parent="." unique_id=494954956 instance=ExtResource("8_gee14")]
 position = Vector2(288, 69)
 metadata/_edit_group_ = true
+
+[node name="TransitionManager" parent="." unique_id=376079471 node_paths=PackedStringArray("transition_area") instance=ExtResource("9_0tnpc")]
+destination_scene_file = "uid://dkt6lw510hyq0"
+transition_area = NodePath("../TransitionArea")
+
+[node name="TransitionArea" type="Area2D" parent="." unique_id=1668303759]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionArea" unique_id=1687454024]
+position = Vector2(618, 64.5)
+shape = SubResource("RectangleShape2D_moenx")
+
+[node name="GameManager" parent="." unique_id=2139347479 instance=ExtResource("1_u5sy4")]

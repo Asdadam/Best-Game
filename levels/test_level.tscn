@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dhjyj02w5h4rk" path="res://scripts/test_level.gd" id="1_gmgay"]
 [ext_resource type="PackedScene" uid="uid://b3hjlgmu1lcvb" path="res://scenes/player.tscn" id="2_w7r7j"]
 [ext_resource type="PackedScene" uid="uid://by7we5eb5m8op" path="res://scenes/enemy.tscn" id="3_o6mel"]
+[ext_resource type="PackedScene" uid="uid://chn3noqafxcul" path="res://scenes/transition_manager.tscn" id="4_w7r7j"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_paw1w"]
 load_path = "res://.godot/imported/Test Tileset.png-de6cf737438dc3faa652d58dca69e27a.ctex"
@@ -15,6 +16,9 @@ texture = SubResource("CompressedTexture2D_paw1w")
 [sub_resource type="TileSet" id="TileSet_ycyol"]
 physics_layer_0/collision_layer = 5
 sources/0 = SubResource("TileSetAtlasSource_j6w7d")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_moenx"]
+size = Vector2(15, 67.5)
 
 [node name="Test Level" type="Node2D" unique_id=1706077573]
 script = ExtResource("1_gmgay")
@@ -51,3 +55,13 @@ scale = Vector2(1, -1)
 position = Vector2(767, 550)
 rotation = -3.1415925
 scale = Vector2(1, -1)
+
+[node name="TransitionManager" parent="." unique_id=376079471 node_paths=PackedStringArray("transition_area") instance=ExtResource("4_w7r7j")]
+destination_scene_file = "uid://c66f2tiagg1sr"
+transition_area = NodePath("../TransitionArea")
+
+[node name="TransitionArea" type="Area2D" parent="." unique_id=1277844887]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionArea" unique_id=1461098972]
+position = Vector2(-281.5, 543.25)
+shape = SubResource("RectangleShape2D_moenx")
