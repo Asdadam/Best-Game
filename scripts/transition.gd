@@ -16,5 +16,4 @@ func change_scene(destination_scene : String) -> void:
 	fade_out.tween_property(color_rect, "modulate:a", 0, 1.0)
 	await fade_out.finished
 	
-	fade_in = null
-	fade_out = null
+	GameManager.curr_scene_file_path = get_tree().current_scene.scene_file_path

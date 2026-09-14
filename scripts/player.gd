@@ -87,7 +87,7 @@ func look_up_down(state : int) -> void:
 		camera_tween.kill()
 
 	camera_tween = create_tween()
-	camera_tween.set_trans(Tween.TRANS_SINE)
+	camera_tween.set_trans(Tween.TRANS_SPRING)
 	camera_tween.set_ease(Tween.EASE_OUT)
 
 	match state:

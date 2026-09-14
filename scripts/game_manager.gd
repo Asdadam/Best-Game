@@ -26,14 +26,16 @@ func _unhandled_input(event):
 		if typing.length() > largest_mode:
 			typing = typing.right(largest_mode)
 			
-		if typing.ends_with("main") and curr_scene_file_path != "res://scenes/game.tscn":
-			typing = ""
-			Transitioner.get_node_or_null("ColorRect").change_scene("res://scenes/game.tscn")
-			curr_scene_file_path = "res://scenes/game.tscn"
-		if typing.ends_with("test") and curr_scene_file_path != "res://levels/test_level.tscn":
-			typing = ""
-			Transitioner.get_node_or_null("ColorRect").change_scene("res://levels/test_level.tscn")
-			curr_scene_file_path = "res://levels/test_level.tscn"
+		if typing.ends_with("main"):
+			if curr_scene_file_path != "res://scenes/game.tscn":
+				typing = ""
+				Transitioner.get_node_or_null("ColorRect").change_scene("res://scenes/game.tscn")
+
+		if typing.ends_with("test"):
+			if curr_scene_file_path != "res://levels/test_level.tscn":
+				typing = ""
+				Transitioner.get_node_or_null("ColorRect").change_scene("res://levels/test_level.tscn")
+
 		if typing.ends_with("rel"):
 			typing = ""
 			Transitioner.get_node_or_null("ColorRect").change_scene(curr_scene_file_path)
