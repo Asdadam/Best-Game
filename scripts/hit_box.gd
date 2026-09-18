@@ -37,6 +37,7 @@ func _on_area_entered(area: Area2D) -> void:
 					
 					
 					target.take_damage(attack_resource.damage)
+					apply_attack_knockback()
 					damage_timer.start()
 					tick_timer.start()
 						
@@ -49,6 +50,7 @@ func _on_area_entered(area: Area2D) -> void:
 							break
 				1:
 					target.take_damage(attack_resource.damage)
+					apply_attack_knockback()
 					target.friction = 450.0
 					target.speed = 30.0
 					var slip_timer := Timer.new()
@@ -63,12 +65,14 @@ func _on_area_entered(area: Area2D) -> void:
 					target.speed = 65.0
 				2:
 					target.take_damage(attack_resource.damage)
+					apply_attack_knockback()
 					if target.dir > 0:
 						target.velocity.x -= knocknack_velocity
 					elif target.dir < 0:
 						target.velocity.x += knocknack_velocity
 				3:
 					target.take_damage(attack_resource.damage)
+					apply_attack_knockback()
 					var stun_time := Timer.new()
 					stun_time.autostart = false
 					stun_time.one_shot = true
@@ -80,3 +84,7 @@ func _on_area_entered(area: Area2D) -> void:
 						target.velocity.x = 0.0
 					await stun_time.timeout
 					target.speed = 65.0
+
+
+func apply_attack_knockback() -> void:
+	player.velocity.x = -player.pivot.scale.x * player.knockback_velocity

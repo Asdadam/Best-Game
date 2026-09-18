@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 class_name Player_Controller
 
+@export var knockback_velocity : float
 
 @onready var combat_manager: Node2D = $CombatManager
 @onready var dash_duration: Timer = $MovementManager/Dash_duration

@@ -37,6 +37,7 @@ func _ready() -> void:
 	pursue_timer.timeout.connect(_on_pursue_ended)
 
 func _physics_process(delta: float) -> void:
+	hit_points = clamp(hit_points, 0, 100)
 	if player:
 		player_above = player.position.y - position.y < 0
 		platform = player.get_platform()
