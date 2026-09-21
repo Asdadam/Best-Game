@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ckjjnngam1dws"
-path="res://.godot/imported/VERSİOBN 2 KARAKTER-Sheet.png-13f47ad7f8775e19d17b596534582792.ctex"
+uid="uid://bjjx6oeaqtm1b"
+path="res://.godot/imported/bu sefer o sefer-Sheet.png-891a003dfaa7927f78deddbf81e74291.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/VERSİOBN 2 KARAKTER-Sheet.png"
-dest_files=["res://.godot/imported/VERSİOBN 2 KARAKTER-Sheet.png-13f47ad7f8775e19d17b596534582792.ctex"]
+source_file="res://assets/sprites/bu sefer o sefer-Sheet.png"
+dest_files=["res://.godot/imported/bu sefer o sefer-Sheet.png-891a003dfaa7927f78deddbf81e74291.ctex"]
 
 [params]
 
