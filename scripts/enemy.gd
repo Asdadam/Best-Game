@@ -25,7 +25,7 @@ var is_dead : bool = false
 var platform : Node2D = null
 var player_above : bool = false
 var has_damaged : bool = false
-var acceleration : float = 40.0
+var acceleration : float = 80.0
 var friction : float = 15.0
 func _ready() -> void:
 	is_dead = false
@@ -37,6 +37,7 @@ func _ready() -> void:
 	pursue_timer.timeout.connect(_on_pursue_ended)
 
 func _physics_process(delta: float) -> void:
+	hit_points = clamp(hit_points, 0, 100)
 	if player:
 		player_above = player.position.y - position.y < 0
 		platform = player.get_platform()
@@ -126,6 +127,7 @@ func _on_pursue_ended():
 	player = null
 
 func death():
+	
 	queue_free()
 	
 func killzone_death():

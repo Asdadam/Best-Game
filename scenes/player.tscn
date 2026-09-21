@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bjjx6oeaqtm1b" path="res://assets/sprites/bu sefer o sefer-Sheet.png" id="4_fjrip"]
 [ext_resource type="Texture2D" uid="uid://ca26m0e0ut4lb" path="res://assets/sprites/NEW CHARACTER TEMPLATE.png" id="5_fjrip"]
 [ext_resource type="Script" uid="uid://bmgaxyag121cn" path="res://scripts/Movement.gd" id="6_tuyoq"]
+[ext_resource type="Resource" uid="uid://dvexbwhejdggw" path="res://scripts/Resources/fire_resource.tres" id="7_smehm"]
 
 [sub_resource type="Animation" id="Animation_dqkch"]
 length = 0.001
@@ -546,6 +547,7 @@ collision_mask = 16
 input_pickable = false
 monitorable = false
 script = ExtResource("3_qhqgy")
+attack_resource = ExtResource("7_smehm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/HitBox" unique_id=680096129]
 position = Vector2(-0.12407011, -7.2100368)

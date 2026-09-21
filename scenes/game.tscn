@@ -365,6 +365,7 @@ tile_set = SubResource("TileSet_lbhrr")
 
 [node name="Player" parent="." unique_id=1311812276 instance=ExtResource("1_uwrxv")]
 position = Vector2(32, 76)
+knockback_velocity = 150.0
 camera_left_limit = -112
 camera_top_limit = -100000000000000000
 camera_right_limit = 623
