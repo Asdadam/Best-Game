@@ -71,19 +71,20 @@ func _on_area_entered(area: Area2D) -> void:
 					elif target.dir < 0:
 						target.velocity.x += knocknack_velocity
 				3:
-					target.take_damage(attack_resource.damage)
-					apply_attack_knockback()
-					var stun_time := Timer.new()
-					stun_time.autostart = false
-					stun_time.one_shot = true
-					stun_time.wait_time = 3.0
-					add_child(stun_time)
-					stun_time.start()
-					if not target_current_health == target.hit_points:
-						target.speed = 0.0
-						target.velocity.x = 0.0
-					await stun_time.timeout
-					target.speed = 65.0
+					if target:
+						target.take_damage(attack_resource.damage)
+						apply_attack_knockback()
+						var stun_time := Timer.new()
+						stun_time.autostart = false
+						stun_time.one_shot = true
+						stun_time.wait_time = 3.0
+						add_child(stun_time)
+						stun_time.start()
+						if not target_current_health == target.hit_points:
+							target.speed = 0.0
+							target.velocity.x = 0.0
+						await stun_time.timeout
+						target.speed = 65.0
 
 
 func apply_attack_knockback() -> void:
